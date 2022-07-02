@@ -13,7 +13,7 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
       <div className="grid grid-cols-2">
         <nav>
           <ul>
-            <li>
+            <li className="text-white">
               <Link to={routes.home()}>Home</Link>
             </li>
           </ul>
