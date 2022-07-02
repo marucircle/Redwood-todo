@@ -7,9 +7,9 @@
       "packages/*"
     ]
   },
-  "scripts":{
-    "web":"yarn workspace web",
-    "api":"yarn workspace api"
+  "scripts": {
+    "web": "yarn workspace web",
+    "api": "yarn workspace api"
   },
   "devDependencies": {
     "@redwoodjs/core": "2.0.0"
