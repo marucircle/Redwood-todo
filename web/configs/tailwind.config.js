@@ -9,7 +9,8 @@ module.exports = {
         pc: '9999px',
       },
       colors: {
-        white: '#f5f5f5',
+        'pure-white': '#ffffff',
+        white: '#fafafa',
         black: '#333333',
       },
       fontSize: {

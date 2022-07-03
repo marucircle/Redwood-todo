@@ -6,21 +6,27 @@ type TodoLayoutProps = {
 
 const TodoLayout = ({ children }: TodoLayoutProps) => {
   return (
-    <>
-      <header>
-        <h1>Redwood Todo</h1>
+    <div className="flex flex-col h-screen">
+      <header className="p-4 bg-pure-white">
+        <h1 className="text-large-title font-bold">Redwood Todo</h1>
       </header>
-      <div className="grid grid-cols-2">
-        <nav>
-          <ul>
-            <li className="text-white">
-              <Link to={routes.home()}>Home</Link>
+      <div className="flex flex-auto">
+        <nav className="w-52 px-2 py-4">
+          <ul className="grid gap-y-4">
+            <li>
+              <Link to={routes.home()}>All</Link>
+            </li>
+            <li>
+              <Link to={routes.home()}>Archived</Link>
+            </li>
+            <li>
+              <Link to={routes.home()}>Completed</Link>
             </li>
           </ul>
         </nav>
-        <main>{children}</main>
+        <main className="flex-auto p-4 bg-white shadow-inner">{children}</main>
       </div>
-    </>
+    </div>
   )
 }
 
