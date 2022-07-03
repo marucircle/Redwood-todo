@@ -16,19 +16,28 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
         <nav className="w-52 py-4">
           <ul className="grid gap-y-4">
             <li>
-              <Link to={routes.home()} className="flex gap-x-4 px-2">
+              <Link
+                to={routes.tasks({ mode: 'all' })}
+                className="flex gap-x-4 px-4"
+              >
                 <FormatListBulleted />
                 <span className="flex-auto">All</span>
               </Link>
             </li>
             <li>
-              <Link to={routes.home()} className="flex gap-x-4 px-2">
+              <Link
+                to={routes.tasks({ mode: 'archived' })}
+                className="flex gap-x-4 px-4"
+              >
                 <Delete />
                 <span className="flex-auto">Archived</span>
               </Link>
             </li>
             <li>
-              <Link to={routes.home()} className="flex gap-x-4 px-2">
+              <Link
+                to={routes.tasks({ mode: 'completed' })}
+                className="flex gap-x-4 px-4"
+              >
                 <CheckOutlined />
                 <span className="flex-auto">Completed</span>
               </Link>

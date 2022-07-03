@@ -621,6 +621,11 @@ video {
   padding-bottom: 1rem;
 }
 
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .text-large-title {
   font-size: 24px;
 }
