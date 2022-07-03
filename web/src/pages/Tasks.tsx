@@ -1,12 +1,6 @@
 import { useParams, routes, Redirect } from '@redwoodjs/router'
 
-const taskViewMode = ['all', 'archived', 'completed'] as const
-
-type TaskViewMode = typeof taskViewMode[number]
-
-const isViewMode = (mode: string): mode is TaskViewMode => {
-  return taskViewMode.some((value) => value === mode)
-}
+import { isViewMode } from '../utils/isViewMode'
 
 const Tasks = () => {
   const { mode = 'all' } = useParams()
