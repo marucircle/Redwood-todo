@@ -1,3 +1,5 @@
+import { CheckOutlined, Delete, FormatListBulleted } from '@material-ui/icons'
+
 import { Link, routes } from '@redwoodjs/router'
 
 type TodoLayoutProps = {
@@ -11,16 +13,25 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
         <h1 className="text-large-title font-bold">Redwood Todo</h1>
       </header>
       <div className="flex flex-auto">
-        <nav className="w-52 px-2 py-4">
+        <nav className="w-52 py-4">
           <ul className="grid gap-y-4">
             <li>
-              <Link to={routes.home()}>All</Link>
+              <Link to={routes.home()} className="flex gap-x-4 px-2">
+                <FormatListBulleted />
+                <span className="flex-auto">All</span>
+              </Link>
             </li>
             <li>
-              <Link to={routes.home()}>Archived</Link>
+              <Link to={routes.home()} className="flex gap-x-4 px-2">
+                <Delete />
+                <span className="flex-auto">Archived</span>
+              </Link>
             </li>
             <li>
-              <Link to={routes.home()}>Completed</Link>
+              <Link to={routes.home()} className="flex gap-x-4 px-2">
+                <CheckOutlined />
+                <span className="flex-auto">Completed</span>
+              </Link>
             </li>
           </ul>
         </nav>
