@@ -13,6 +13,8 @@
     ]
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
     "@redwoodjs/forms": "2.0.0",
     "@redwoodjs/router": "2.0.0",
     "@redwoodjs/web": "2.0.0",
@@ -40,6 +42,6 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "tailwind-build": "tailwindcss build src/tailwind.css -o src/index.css --config ./configs/tailwind.config.js",
-    "tailwind-build:watch":"tailwindcss build src/tailwind.css -o src/index.css --config ./configs/tailwind.config.js -w"
+    "tailwind-build:watch": "tailwindcss build src/tailwind.css -o src/index.css --config ./configs/tailwind.config.js -w"
   }
 }

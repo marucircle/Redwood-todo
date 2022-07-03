@@ -10,7 +10,7 @@
   "scripts": {
     "web": "yarn workspace web",
     "api": "yarn workspace api",
-    "storybook":"yarn rw storybook"
+    "storybook": "yarn rw storybook"
   },
   "devDependencies": {
     "@redwoodjs/core": "2.0.0"
