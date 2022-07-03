@@ -39,7 +39,6 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "tailwind-build": "tailwindcss build src/tailwind.css -o src/index.css --config ./configs/tailwind.config.js",
     "tailwind-build:watch":"tailwindcss build src/tailwind.css -o src/index.css --config ./configs/tailwind.config.js -w"
   }
