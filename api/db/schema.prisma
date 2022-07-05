@@ -16,3 +16,11 @@ model UserExample {
   email String  @unique
   name  String?
 }
+
+model Tag {
+  id         Int      @id @default(autoincrement())
+  name       String
+  bg_color   String
+  text_color String
+  created_at DateTime @default(now())
+}
