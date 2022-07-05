@@ -3,6 +3,7 @@ import { TaskCard } from 'src/components/TaskCard'
 const task = {
   id: 1,
   name: 'TaskTest',
+  description: 'タスクの簡潔な内容',
   detail: 'タスクのテストです',
   created_at: new Date('2022/04/01'),
   tags: [
@@ -25,8 +26,12 @@ const task = {
   is_archived: false,
 }
 
-export const taskCard = () => {
+export const defaultTaskCard = () => {
   return <TaskCard task={task} />
+}
+
+export const checkedTaskCard = () => {
+  return <TaskCard task={{ ...task, is_checked: true }} />
 }
 
 export default { title: 'components/TaskCard' }
