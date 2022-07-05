@@ -3,3 +3,28 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@layer utilities {
+  .checkbox{
+    position:relative;
+    border:solid 2px #00ffab;
+    border-radius: 0.125rem;
+    width: 1.5rem;
+    height:1.5rem;
+    cursor:pointer;
+  }
+  .checkbox_is_checked{
+    background-color:#00ffab;
+  }
+  .checkbox_is_checked::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:25%;
+    width:50%;
+    height: 83.333333%;
+    border-right:solid 4px #fefefe;
+    border-bottom:solid 4px #fefefe;
+    transform:rotate(45deg);
+  }
+}

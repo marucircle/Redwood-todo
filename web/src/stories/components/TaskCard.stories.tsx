@@ -34,4 +34,8 @@ export const checkedTaskCard = () => {
   return <TaskCard task={{ ...task, is_checked: true }} />
 }
 
+export const archivedTaskCard = () => {
+  return <TaskCard task={{ ...task, is_archived: true }} />
+}
+
 export default { title: 'components/TaskCard' }
