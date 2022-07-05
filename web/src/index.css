@@ -551,6 +551,14 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
 .flex {
   display: flex;
 }
@@ -559,8 +567,16 @@ video {
   display: grid;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
 .h-screen {
   height: 100vh;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-52 {
@@ -571,25 +587,12 @@ video {
   flex: 1 1 auto;
 }
 
-.flex-1 {
-  flex: 1 1 0%;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
 }
 
 .gap-y-4 {
   row-gap: 1rem;
-}
-
-.gap-x-2 {
-  -moz-column-gap: 0.5rem;
-       column-gap: 0.5rem;
 }
 
 .gap-x-4 {
@@ -605,12 +608,17 @@ video {
   border-radius: 0.375rem;
 }
 
-.rounded-xl {
-  border-radius: 0.75rem;
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 
-.rounded-lg {
-  border-radius: 0.5rem;
+.border-2 {
+  border-width: 2px;
+}
+
+.border-checkbox {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 255 171 / var(--tw-border-opacity));
 }
 
 .bg-pure-white {
@@ -623,6 +631,11 @@ video {
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
 }
 
+.bg-checkbox {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 255 171 / var(--tw-bg-opacity));
+}
+
 .p-4 {
   padding: 1rem;
 }
@@ -630,6 +643,16 @@ video {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .py-4 {
@@ -642,50 +665,24 @@ video {
   padding-right: 1rem;
 }
 
-.py-2 {
+.pt-2 {
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-.pt-4 {
-  padding-top: 1rem;
-}
-
-.pl-4 {
-  padding-left: 1rem;
-}
-
-.pl-2 {
-  padding-left: 0.5rem;
 }
 
 .pr-2 {
   padding-right: 0.5rem;
 }
 
-.pt-2 {
-  padding-top: 0.5rem;
-}
-
-.text-large-title {
-  font-size: 24px;
+.text-medium-text {
+  font-size: 12px;
 }
 
 .text-medium-title {
   font-size: 20px;
 }
 
-.text-small-text {
-  font-size: 10px;
-}
-
-.text-medium-text {
-  font-size: 12px;
+.text-large-title {
+  font-size: 24px;
 }
 
 .font-bold {
@@ -696,14 +693,9 @@ video {
   text-transform: uppercase;
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(250 250 250 / var(--tw-text-opacity));
-}
-
-.shadow-sm {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -713,14 +705,150 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-md {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+.after\:absolute::after {
+  content: var(--tw-content);
+  position: absolute;
 }
 
-.shadow-lg {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+.after\:top-0::after {
+  content: var(--tw-content);
+  top: 0;
+}
+
+.after\:left-1\/4::after {
+  content: var(--tw-content);
+  left: 25%;
+}
+
+.after\:top-1\/4::after {
+  content: var(--tw-content);
+  top: 25%;
+}
+
+.after\:top-1\/2::after {
+  content: var(--tw-content);
+  top: 50%;
+}
+
+.after\:top-10::after {
+  content: var(--tw-content);
+  top: 2.5rem;
+}
+
+.after\:top-1::after {
+  content: var(--tw-content);
+  top: 0.25rem;
+}
+
+.after\:h-1\/4::after {
+  content: var(--tw-content);
+  height: 25%;
+}
+
+.after\:h-1\/2::after {
+  content: var(--tw-content);
+  height: 50%;
+}
+
+.after\:h-2\/4::after {
+  content: var(--tw-content);
+  height: 50%;
+}
+
+.after\:h-1\/6::after {
+  content: var(--tw-content);
+  height: 16.666667%;
+}
+
+.after\:h-5\/6::after {
+  content: var(--tw-content);
+  height: 83.333333%;
+}
+
+.after\:h-4\/6::after {
+  content: var(--tw-content);
+  height: 66.666667%;
+}
+
+.after\:w-1\/2::after {
+  content: var(--tw-content);
+  width: 50%;
+}
+
+.after\:w-1\/3::after {
+  content: var(--tw-content);
+  width: 33.333333%;
+}
+
+.after\:w-2\/3::after {
+  content: var(--tw-content);
+  width: 66.666667%;
+}
+
+.after\:w-3\/6::after {
+  content: var(--tw-content);
+  width: 50%;
+}
+
+.after\:w-2\/6::after {
+  content: var(--tw-content);
+  width: 33.333333%;
+}
+
+.after\:rotate-45::after {
+  content: var(--tw-content);
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.after\:border-2::after {
+  content: var(--tw-content);
+  border-width: 2px;
+}
+
+.after\:border-4::after {
+  content: var(--tw-content);
+  border-width: 4px;
+}
+
+.after\:border-l-4::after {
+  content: var(--tw-content);
+  border-left-width: 4px;
+}
+
+.after\:border-b-4::after {
+  content: var(--tw-content);
+  border-bottom-width: 4px;
+}
+
+.after\:border-t-4::after {
+  content: var(--tw-content);
+  border-top-width: 4px;
+}
+
+.after\:border-r-4::after {
+  content: var(--tw-content);
+  border-right-width: 4px;
+}
+
+.after\:border-white::after {
+  content: var(--tw-content);
+  --tw-border-opacity: 1;
+  border-color: rgb(250 250 250 / var(--tw-border-opacity));
+}
+
+.after\:bg-white::after {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+}
+
+.after\:content-\[\"\"\]::after {
+  --tw-content: "";
+  content: var(--tw-content);
+}
+
+.after\:content-\[\'\'\]::after {
+  --tw-content: '';
+  content: var(--tw-content);
 }

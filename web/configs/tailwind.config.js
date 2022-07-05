@@ -12,6 +12,7 @@ module.exports = {
         'pure-white': '#ffffff',
         white: '#fafafa',
         black: '#333333',
+        checkbox: '#00ffab',
       },
       fontSize: {
         'small-text': '10px',
