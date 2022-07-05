@@ -29,6 +29,20 @@ export const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
         })}
       </div>
       {task.description && <div className="py-2">{task.description}</div>}
+      <div className="pt-4 flex justify-around">
+        <div className="button text-medium-title bg-info text-white">
+          詳細を見る
+        </div>
+        {task.is_archived ? (
+          <div className="button text-medium-title bg-green text-white">
+            元に戻す
+          </div>
+        ) : (
+          <div className="button text-medium-title bg-danger text-white">
+            削除する
+          </div>
+        )}
+      </div>
     </div>
   )
 }
