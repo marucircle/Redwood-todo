@@ -13,6 +13,7 @@ export type Tag = {
 export type Task = {
   id: number
   name: string
+  description?: string
   detail: string
   tags: Tag[]
   created_at: Date
