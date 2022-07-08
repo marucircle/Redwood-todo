@@ -4,7 +4,11 @@ import type {
   TagResolvers,
 } from 'types/graphql'
 
+import { validateWith } from '@redwoodjs/api'
+
 import { db } from 'src/lib/db'
+import { colorCodeValidation } from 'src/validations/colorCodeValidation'
+import { stringValidation } from 'src/validations/stringValidation'
 
 export const tags: QueryResolvers['tags'] = () => {
   return db.tag.findMany()
@@ -17,6 +21,22 @@ export const tag: QueryResolvers['tag'] = ({ id }) => {
 }
 
 export const createTag: MutationResolvers['createTag'] = ({ input }) => {
+  validateWith(() => {
+    const validate_result = stringValidation(input.name, 'name', 100)
+    if (!validate_result.ok) throw validate_result.message
+  })
+  validateWith(() => {
+    const validate_result = colorCodeValidation(
+      input.text_color,
+      'text_color',
+      8
+    )
+    if (!validate_result.ok) throw validate_result.message
+  })
+  validateWith(() => {
+    const validate_result = colorCodeValidation(input.bg_color, 'bg_color', 8)
+    if (!validate_result.ok) throw validate_result.message
+  })
   return db.tag.create({
     data: input,
   })
