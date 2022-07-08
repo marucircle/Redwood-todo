@@ -5,8 +5,8 @@ export const isStringValidation = (
   field: string
 ): value is string => {
   if (value instanceof String || typeof value === 'string') {
-    throw new ValidationError(`${field}フィールドには文字列を入力してください`)
-  } else {
     return true
+  } else {
+    throw new ValidationError(`${field}フィールドには文字列を入力してください`)
   }
 }

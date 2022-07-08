@@ -6,7 +6,7 @@ export const patternValidation = (
   pattern: RegExp,
   pattern_name: string
 ) => {
-  if (pattern.test(value)) {
+  if (!pattern.test(value)) {
     throw new ValidationError(
       `${field}フィールドは${pattern_name}の形式通りに入力してください`
     )

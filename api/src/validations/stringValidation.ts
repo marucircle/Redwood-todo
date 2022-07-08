@@ -1,5 +1,4 @@
-import { ValidationError } from '@redwoodjs/graphql-server'
-
+import { ValidationError } from './shared/error'
 import { isNotBlankValidation } from './shared/string/isNotBlankValidation'
 import { maxLengthValidation } from './shared/string/maxLengthValidation'
 import { isStringValidation } from './shared/typeValidation'
@@ -10,12 +9,7 @@ export const stringValidation = (
   length: number
 ): { ok: boolean; message?: string } => {
   try {
-    if (
-      isStringValidation(
-        value,
-        `${field}フィールドには文字列を入力してください`
-      )
-    ) {
+    if (isStringValidation(value, field)) {
       const trimed_value = value.trim()
       isNotBlankValidation(trimed_value, field)
       maxLengthValidation(trimed_value, field, length)
