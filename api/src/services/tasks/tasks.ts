@@ -73,8 +73,8 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
       ...input,
       tags: {
         set: [],
-        connect: input.tags.map((tag) => {
-          return { id: tag.id }
+        connect: input.tags?.map((tag_id) => {
+          return { id: tag_id }
         }),
       },
     },
