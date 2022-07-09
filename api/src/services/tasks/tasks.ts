@@ -42,7 +42,7 @@ export const createTask: MutationResolvers['createTask'] = ({ input }) => {
     data: {
       ...input,
       tags: {
-        connect: input.tags?.map((tag_id) => {
+        connect: input.tags.map((tag_id) => {
           return { id: tag_id }
         }),
       },
@@ -51,8 +51,33 @@ export const createTask: MutationResolvers['createTask'] = ({ input }) => {
 }
 
 export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
+  validateWith(() => {
+    let ok = true
+    const messages = []
+    let validate_result = stringValidation(input.name, 'name', 100)
+    if (!validate_result.ok) {
+      ok = false
+      messages.push(validate_result.message)
+    }
+    validate_result = stringValidation(input.detail, 'detail', 99999999)
+    if (!validate_result.ok) {
+      ok = false
+      messages.push(validate_result.message)
+    }
+    if (!ok) {
+      throw organizeErrorMessage(messages)
+    }
+  })
   return db.task.update({
-    data: input,
+    data: {
+      ...input,
+      tags: {
+        set: [],
+        connect: input.tags.map((tag) => {
+          return { id: tag.id }
+        }),
+      },
+    },
     where: { id },
   })
 }
