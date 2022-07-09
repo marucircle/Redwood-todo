@@ -4,7 +4,11 @@ import type {
   TaskResolvers,
 } from 'types/graphql'
 
+import { validateWith } from '@redwoodjs/api'
+
 import { db } from 'src/lib/db'
+import { organizeErrorMessage } from 'src/utils/organizeErrorMessage'
+import { stringValidation } from 'src/validations/stringValidation'
 
 export const tasks: QueryResolvers['tasks'] = () => {
   return db.task.findMany()
@@ -17,8 +21,32 @@ export const task: QueryResolvers['task'] = ({ id }) => {
 }
 
 export const createTask: MutationResolvers['createTask'] = ({ input }) => {
+  validateWith(() => {
+    let ok = true
+    const messages = []
+    let validate_result = stringValidation(input.name, 'name', 100)
+    if (!validate_result.ok) {
+      ok = false
+      messages.push(validate_result.message)
+    }
+    validate_result = stringValidation(input.detail, 'detail', 99999999)
+    if (!validate_result.ok) {
+      ok = false
+      messages.push(validate_result.message)
+    }
+    if (!ok) {
+      throw organizeErrorMessage(messages)
+    }
+  })
   return db.task.create({
-    data: input,
+    data: {
+      ...input,
+      tags: {
+        connect: input.tags?.map((tag_id) => {
+          return { id: tag_id }
+        }),
+      },
+    },
   })
 }
 

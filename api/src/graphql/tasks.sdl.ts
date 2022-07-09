@@ -19,9 +19,9 @@ export const schema = gql`
     name: String!
     detail: String!
     priority: Int!
+    tags: [Int]!
     is_checked: Boolean!
     is_archived: Boolean!
-    created_at: DateTime!
   }
 
   input UpdateTaskInput {
