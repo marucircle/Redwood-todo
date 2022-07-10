@@ -91,6 +91,25 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
   })
 }
 
+export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
+  id,
+}) => {
+  const previous = await db.task.findUnique({ where: { id } })
+  return await db.task.update({
+    data: { is_checked: !previous.is_checked },
+    where: { id },
+  })
+}
+
+export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
+  async ({ id }) => {
+    const previous = await db.task.findUnique({ where: { id } })
+    return await db.task.update({
+      data: { is_archived: !previous.is_archived },
+      where: { id },
+    })
+  }
+
 export const deleteTask: MutationResolvers['deleteTask'] = ({ id }) => {
   return db.task.delete({
     where: { id },
