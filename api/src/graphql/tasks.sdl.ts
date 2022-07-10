@@ -20,8 +20,6 @@ export const schema = gql`
     detail: String!
     priority: Int!
     tags: [Int]!
-    is_checked: Boolean!
-    is_archived: Boolean!
   }
 
   input UpdateTaskInput {
@@ -36,6 +34,8 @@ export const schema = gql`
   type Mutation {
     createTask(input: CreateTaskInput!): Task! @requireAuth
     updateTask(id: Int!, input: UpdateTaskInput!): Task! @requireAuth
+    updateCheckTask(id: Int!): Task! @requireAuth
+    updateArchiveTask(id: Int!): Task! @requireAuth
     deleteTask(id: Int!): Task! @requireAuth
   }
 `
