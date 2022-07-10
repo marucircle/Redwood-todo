@@ -50,6 +50,28 @@ export const createTag: MutationResolvers['createTag'] = ({ input }) => {
 }
 
 export const updateTag: MutationResolvers['updateTag'] = ({ id, input }) => {
+  validateWith(() => {
+    let ok = true
+    const messages = []
+    let validate_result = stringValidation(input.name, 'name', 100)
+    if (!validate_result.ok) {
+      ok = false
+      messages.push(validate_result.message)
+    }
+    validate_result = colorCodeValidation(input.text_color, 'text_color', 8)
+    if (!validate_result.ok) {
+      ok = false
+      messages.push(validate_result.message)
+    }
+    validate_result = colorCodeValidation(input.bg_color, 'bg_color', 8)
+    if (!validate_result.ok) {
+      ok = false
+      messages.push(validate_result.message)
+    }
+    if (!ok) {
+      throw organizeErrorMessage(messages)
+    }
+  })
   return db.tag.update({
     data: input,
     where: { id },
