@@ -7,6 +7,7 @@ export const schema = gql`
     user: User!
     user_id: Int!
     created_at: DateTime!
+    tasks: [Task]!
   }
 
   type Query {

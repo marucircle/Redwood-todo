@@ -7,7 +7,7 @@ export const standard = defineScenario<Prisma.TagCreateArgs>({
         name: 'String',
         bg_color: 'String',
         text_color: 'String',
-        user: { create: { name: 'String2761622', password: 'String' } },
+        user: { create: { name: 'String2935158', password: 'String' } },
       },
     },
     two: {
@@ -15,7 +15,7 @@ export const standard = defineScenario<Prisma.TagCreateArgs>({
         name: 'String',
         bg_color: 'String',
         text_color: 'String',
-        user: { create: { name: 'String2862291', password: 'String' } },
+        user: { create: { name: 'String5550014', password: 'String' } },
       },
     },
   },

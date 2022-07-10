@@ -12,12 +12,19 @@ import { colorCodeValidation } from 'src/validations/colorCodeValidation'
 import { stringValidation } from 'src/validations/stringValidation'
 
 export const tags: QueryResolvers['tags'] = () => {
-  return db.tag.findMany()
+  return db.tag.findMany({
+    include: {
+      tasks: true,
+    },
+  })
 }
 
 export const tag: QueryResolvers['tag'] = ({ id }) => {
   return db.tag.findUnique({
     where: { id },
+    include: {
+      tasks: true,
+    },
   })
 }
 

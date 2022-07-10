@@ -11,12 +11,19 @@ import { organizeErrorMessage } from 'src/utils/organizeErrorMessage'
 import { stringValidation } from 'src/validations/stringValidation'
 
 export const tasks: QueryResolvers['tasks'] = () => {
-  return db.task.findMany()
+  return db.task.findMany({
+    include: {
+      tags: true,
+    },
+  })
 }
 
 export const task: QueryResolvers['task'] = ({ id }) => {
   return db.task.findUnique({
     where: { id },
+    include: {
+      tags: true,
+    },
   })
 }
 
