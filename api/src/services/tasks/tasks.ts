@@ -41,6 +41,8 @@ export const createTask: MutationResolvers['createTask'] = ({ input }) => {
   return db.task.create({
     data: {
       ...input,
+      is_checked: false,
+      is_archived: false,
       tags: {
         connect: input.tags.map((tag_id) => {
           return { id: tag_id }

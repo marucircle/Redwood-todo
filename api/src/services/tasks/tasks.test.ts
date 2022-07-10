@@ -27,8 +27,6 @@ describe('tasks', () => {
         detail: 'String',
         tags: [1, 2],
         priority: 8839582,
-        is_checked: true,
-        is_archived: true,
       },
     })
 

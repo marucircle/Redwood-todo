@@ -20,8 +20,6 @@ export const schema = gql`
     detail: String!
     priority: Int!
     tags: [Int]!
-    is_checked: Boolean!
-    is_archived: Boolean!
   }
 
   input UpdateTaskInput {
