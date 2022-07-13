@@ -36,5 +36,8 @@ export const deleteUser: MutationResolvers['deleteUser'] = ({ id }) => {
 }
 
 export const User: UserResolvers = {
-  Tag: (_obj, { root }) => db.user.findUnique({ where: { id: root.id } }).Tag(),
+  tags: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).tags(),
+  tasks: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).tasks(),
 }

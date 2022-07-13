@@ -7364,12 +7364,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:17.0.17, @types/react-dom@npm:<18.0.0":
-  version: 17.0.17
-  resolution: "@types/react-dom@npm:17.0.17"
+"@types/react-dom@npm:17.0.2":
+  version: 17.0.2
+  resolution: "@types/react-dom@npm:17.0.2"
   dependencies:
-    "@types/react": ^17
-  checksum: 1e330f6e1c0794562a8d3459357b5b401b6f23185991bdaf9e5025cad7ccace502662b071db765b07b0d79f313be1a7584c5ef775b1062d76585b6b9aec0693c
+    "@types/react": "*"
+  checksum: 81be25c107d8f39f8f17b816f8806da006f9c2669681128f5bfa368432af5a54b7401f64abcccf20bd00599962a7b2531c995a54467e2dc7b23db67cc5b01246
   languageName: node
   linkType: hard
 
@@ -7391,36 +7391,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 18.0.14
-  resolution: "@types/react@npm:18.0.14"
+"@types/react@npm:17.0.2":
+  version: 17.0.2
+  resolution: "@types/react@npm:17.0.2"
   dependencies:
     "@types/prop-types": "*"
-    "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 18250834286bec2b71f2bc8cc03ff62a01c90b214935d8abc56db9787968c4ea7f99a2a23ddff63e298d8513e091a8ae22c8f3c87a24c02909e3a9528eedda73
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:17.0.45":
-  version: 17.0.45
-  resolution: "@types/react@npm:17.0.45"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: c8736331aed7a561758757a09ddbed801b7d0a931378741a271afa230403d5306a0d5119a0621f40366d59a5f0174e4c569547e1e4767bb0c287835ec4966cb5
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^17":
-  version: 17.0.47
-  resolution: "@types/react@npm:17.0.47"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 110ebdc1bc5524e4698ed653b86084cb78b338df7d23042752d13253eb3ed5a291462a4f93d8bdceb1237330b4b0c7e9c65bf9ab39c341a54d7da3d703f76010
+  checksum: 6b48673db526015c45a0dc036394cdc7d5fd48388b3f05f8f433e74c08fb4c80e5acfc66baa2c7cc8a091d0d8524bcb00397bc7c6286fcefad4bf4cef959d764
   languageName: node
   linkType: hard
 
@@ -7437,13 +7414,6 @@ __metadata:
   version: 0.12.0
   resolution: "@types/retry@npm:0.12.0"
   checksum: 7c5c9086369826f569b83a4683661557cab1361bac0897a1cefa1a915ff739acd10ca0d62b01071046fe3f5a3f7f2aec80785fe283b75602dc6726781ea3e328
-  languageName: node
-  linkType: hard
-
-"@types/scheduler@npm:*":
-  version: 0.16.2
-  resolution: "@types/scheduler@npm:0.16.2"
-  checksum: 89a3a922f03609b61c270d534226791edeedcb1b06f0225d5543ac17830254624ef9d8a97ad05418e4ce549dd545bddf1ff28cb90658ff10721ad14556ca68a5
   languageName: node
   linkType: hard
 
@@ -25596,6 +25566,7 @@ __metadata:
     "@material-ui/core": ^4.12.4
     "@material-ui/icons": ^4.11.3
     "@mdx-js/react": ^1.6.22
+    "@redwoodjs/auth": 2.0.0
     "@redwoodjs/forms": 2.0.0
     "@redwoodjs/router": 2.0.0
     "@redwoodjs/web": 2.0.0
