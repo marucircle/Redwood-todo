@@ -33,7 +33,7 @@ const Routes = () => {
         <Route path="/tasks" page={Tasks} name="task" />
       </Set>
       <Set wrap={[StandardLayout]}>
-        <Route path="/tasks/create" page={CreateTask} name="createTask" />
+        <Route path="/task/create" page={CreateTask} name="createTask" />
       </Set>
     </Router>
   )
