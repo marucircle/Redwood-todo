@@ -133,8 +133,8 @@ export const handler = async (event, context) => {
     // something like `id` or `userId` or even `email`)
     authFields: {
       id: 'id',
-      username: 'email',
-      hashedPassword: 'hashedPassword',
+      username: 'name',
+      hashedPassword: 'password',
       salt: 'salt',
       resetToken: 'resetToken',
       resetTokenExpiresAt: 'resetTokenExpiresAt',
