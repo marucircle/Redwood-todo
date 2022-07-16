@@ -1,5 +1,6 @@
 import { CheckOutlined, Delete, FormatListBulleted } from '@material-ui/icons'
 
+import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
 
 type TodoLayoutProps = {
@@ -7,6 +8,7 @@ type TodoLayoutProps = {
 }
 
 const TodoLayout = ({ children }: TodoLayoutProps) => {
+  const { logOut } = useAuth()
   return (
     <div className="flex flex-col h-screen">
       <header className="p-4 bg-pure-white">
@@ -41,6 +43,12 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
                 <CheckOutlined />
                 <span className="flex-auto">Completed</span>
               </Link>
+            </li>
+            <li>
+              <div className="flex gap-x-4 px-4" onClick={logOut}>
+                <CheckOutlined />
+                <span>Logout</span>
+              </div>
             </li>
           </ul>
         </nav>

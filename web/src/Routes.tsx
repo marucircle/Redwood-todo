@@ -7,7 +7,7 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Router, Route, Set } from '@redwoodjs/router'
+import { Router, Route, Set, Private } from '@redwoodjs/router'
 
 import StandardLayout from './layouts/StandardLayout'
 import TodoLayout from './layouts/TodoLayout'
@@ -28,13 +28,15 @@ const Routes = () => {
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
         <Route notfound page={NotFoundPage} />
       </Set>
-      <Set wrap={[TodoLayout]}>
-        <Route path="/tasks/{mode:String}" page={Tasks} name="tasks" />
-        <Route path="/tasks" page={Tasks} name="task" />
-      </Set>
-      <Set wrap={[StandardLayout]}>
-        <Route path="/task/create" page={CreateTask} name="createTask" />
-      </Set>
+      <Private unauthenticated="login">
+        <Set wrap={[TodoLayout]}>
+          <Route path="/tasks/{mode:String}" page={Tasks} name="tasks" />
+          <Route path="/tasks" page={Tasks} name="task" />
+        </Set>
+        <Set wrap={[StandardLayout]}>
+          <Route path="/task/create" page={CreateTask} name="createTask" />
+        </Set>
+      </Private>
     </Router>
   )
 }
