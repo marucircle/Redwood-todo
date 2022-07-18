@@ -14,6 +14,9 @@ import { hasTask } from './tasks.validation'
 
 export const tasks: QueryResolvers['tasks'] = () => {
   return db.task.findMany({
+    where: {
+      user_id: context.currentUser.id,
+    },
     include: {
       tags: true,
     },
@@ -21,6 +24,8 @@ export const tasks: QueryResolvers['tasks'] = () => {
 }
 
 export const task: QueryResolvers['task'] = ({ id }) => {
+  if (!hasTask(context.currentUser.id, id))
+    throw organizeErrorMessage(['参照権限のないタスクです'])
   return db.task.findUnique({
     where: { id },
     include: {
@@ -128,7 +133,7 @@ export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
 export const deleteTask: MutationResolvers['deleteTask'] = ({ id }) => {
   validateWith(() => {
     if (!hasTask(context.currentUser.id, id))
-      throw organizeErrorMessage(['更新権限のないタスクです'])
+      throw organizeErrorMessage(['削除権限のないタスクです'])
   })
   return db.task.delete({
     where: { id },
