@@ -14,3 +14,20 @@ export const Tag = ({ tag }: TagProps): JSX.Element => {
     </span>
   )
 }
+
+export type NewTagProps = {
+  onClick: () => void
+}
+
+export const NewTag = ({ onClick }: NewTagProps): JSX.Element => {
+  return (
+    <span
+      style={{ backgroundColor: '#cccccc', color: '#ffffff' }}
+      className="px-2 py-1 rounded-full text-medium-text cursor-pointer flex flex-row items-center gap-x-2 shadow-sm"
+      onClick={onClick}
+    >
+      <span className="font-bold">+</span>
+      <span className="font-bold">New!</span>
+    </span>
+  )
+}
