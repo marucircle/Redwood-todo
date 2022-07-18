@@ -25,7 +25,10 @@ module.exports = {
         'medium-title': '20px',
         'large-title': '24px',
       },
-      zIndex: {},
+      zIndex: {
+        overlay: 50,
+        modal: 100,
+      },
       spacing: {
         px: '1px',
         0: '0',

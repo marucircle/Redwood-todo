@@ -5,6 +5,13 @@
 @tailwind utilities;
 
 @layer utilities {
+
+  .position-center{
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+
   .checkbox{
     position:relative;
     border:solid 2px #00ffab;
