@@ -9,6 +9,7 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
         priority: 4783626,
         is_checked: true,
         is_archived: true,
+        user_id: 1,
       },
     },
     two: {
@@ -18,6 +19,7 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
         priority: 1467779,
         is_checked: true,
         is_archived: true,
+        user_id: 1,
       },
     },
   },
