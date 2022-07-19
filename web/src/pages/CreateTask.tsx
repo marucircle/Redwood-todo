@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import { Form, Label, TextAreaField, TextField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 
+import { SelectTagModal } from 'src/components/containers/SelectTagModal'
 import { NewTag, Tag as TagComponent } from 'src/components/Tag'
 import { Tag } from 'src/types'
 
@@ -20,6 +21,7 @@ const CreateTask = () => {
   }
   return (
     <div>
+      {isOpenModal && <SelectTagModal onClose={() => setIsOpenModal(false)} />}
       <div className="my-4">
         <span className="bg-info px-4 mx-4 py-2">
           <Link to={routes.createTask()}>Back</Link>
@@ -27,8 +29,7 @@ const CreateTask = () => {
       </div>
       <Form
         onSubmit={onSubmit}
-        className="mt-12 grid justify-items-center
- grid-cols-1"
+        className="mt-12 grid justify-items-center grid-cols-1"
       >
         <div className="w-3/4 my-4 flex flex-row items-baseline gap-x-8">
           <Label name="name" className="mb-2 font-bold">
@@ -66,7 +67,7 @@ const CreateTask = () => {
               rows={10}
             ></TextAreaField>
           ) : (
-            <div className="bg-pure-white py-4 px-4 shadow-md rounded-md">
+            <div className="bg-pure-white py-4 px-4">
               <ReactMarkdown
                 className="reactMarkDown"
                 remarkPlugins={[remarkGfm]}

@@ -27,7 +27,7 @@ export const NewTag = ({ onClick }: NewTagProps): JSX.Element => {
       onClick={onClick}
     >
       <span className="font-bold">+</span>
-      <span className="font-bold">New!</span>
+      <span className="font-bold">Add</span>
     </span>
   )
 }
