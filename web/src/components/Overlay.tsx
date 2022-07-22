@@ -1,8 +1,8 @@
 export type OverlayType = {
-  onClick: () => void
+  onClick?: () => void
 }
 
-export const Overlay = ({ onClick }: OverlayType): JSX.Element => {
+export const Overlay = ({ onClick = () => {} }: OverlayType): JSX.Element => {
   return (
     <div
       onClick={onClick}
