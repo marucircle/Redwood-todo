@@ -22404,6 +22404,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-loader-spinner@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "react-loader-spinner@npm:5.1.5"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: f7093452b323b3d67fabdeb0aeebc1a2d7230f223e38a2a2c6cc652757d7d25520c1d7b8d0ea5861fadf58023cda06387939b697c199dd5d6ba43963fe31ecda
+  languageName: node
+  linkType: hard
+
 "react-markdown@npm:^8.0.3":
   version: 8.0.3
   resolution: "react-markdown@npm:8.0.3"
@@ -26487,6 +26497,7 @@ __metadata:
     react: 17.0.2
     react-color: ^2.19.3
     react-dom: 17.0.2
+    react-loader-spinner: ^5.1.5
     react-markdown: ^8.0.3
     remark-gfm: ^3.0.1
     tailwindcss: ^3.1.4
