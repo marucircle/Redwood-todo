@@ -3,11 +3,11 @@ import { taskViewMode } from './constants'
 export type TaskViewMode = typeof taskViewMode[number]
 
 export type Tag = {
-  id: number
+  id?: number
   name: string
   bg_color: string
   text_color: string
-  created_at: Date
+  created_at?: Date
 }
 
 export type Task = {
