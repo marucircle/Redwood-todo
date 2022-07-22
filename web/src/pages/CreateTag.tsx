@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { CirclePicker, CompactPicker } from 'react-color'
+import { CompactPicker } from 'react-color'
 
-import { Form, Label, TextField } from '@redwoodjs/forms'
+import { FieldError, Form, Label, TextField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 
 import { Tag } from 'src/components/Tag'
@@ -10,9 +10,12 @@ import { Tag } from 'src/components/Tag'
 const CreateTag = () => {
   const [color, setColor] = useState({
     bgColor: '#ffffff',
-    textColor: '#0000000',
+    textColor: '#000000',
   })
-  const onSubmit = () => {}
+  const [tagText, setTagText] = useState('Tag')
+  const onSubmit = () => {
+    console.log('test')
+  }
 
   return (
     <div>
@@ -21,32 +24,31 @@ const CreateTag = () => {
           <Link to={routes.createTag()}>Back</Link>
         </span>
       </div>
-      <div className="w-3/4 my-4 flex flex-row justify-items-center items-baseline gap-x-8">
-        <div className="mb-2 font-bold">View:</div>
-        <Tag
-          tag={{
-            name: 'test',
-            text_color: color.textColor,
-            bg_color: color.bgColor,
-          }}
-        />
-      </div>
       <Form
         onSubmit={onSubmit}
         className="mt-12 grid justify-items-center grid-cols-1"
       >
         <div className="w-3/4 my-4 grid grid-cols-form-input items-baseline gap-x-8">
           <Label name="name" className="mb-2 font-bold">
-            タスク名
+            Task Name
           </Label>
-          <TextField
-            name="name"
-            className="py-2 px-4 grow shadow-md rounded-md"
-          />
+          <div className="flex flex-col">
+            <TextField
+              name="name"
+              className="py-2 px-4 grow shadow-md rounded-md"
+              validation={{ required: true }}
+              onChange={(e) => setTagText(e.target.value)}
+            />
+            <FieldError
+              name="name"
+              className="error-message"
+              style={{ color: '#ff0000' }}
+            ></FieldError>
+          </div>
         </div>
         <div className="w-3/4 my-4 grid grid-cols-color-input items-center gap-x-8">
           <Label name="name" className="mb-2 font-bold">
-            テキストカラー
+            Text Color
           </Label>
           <CompactPicker
             color={color.textColor}
@@ -59,7 +61,7 @@ const CreateTag = () => {
         </div>
         <div className="w-3/4 my-4 grid grid-cols-color-input items-center gap-x-8">
           <Label name="name" className="mb-2 font-bold">
-            タグカラー
+            Tag Color
           </Label>
           <CompactPicker
             color={color.bgColor}
@@ -69,6 +71,21 @@ const CreateTag = () => {
               })
             }
           />
+        </div>
+        <div className="w-3/4 my-4 grid grid-cols-color-input items-center gap-x-8">
+          <div className="mb-2 font-bold">Preview</div>
+          <Tag
+            tag={{
+              name: tagText,
+              text_color: color.textColor,
+              bg_color: color.bgColor,
+            }}
+          />
+        </div>
+        <div className="my-4 flex justify-center">
+          <button className="bg-info px-4 mx-4 py-2" type="submit">
+            Create Tag
+          </button>
         </div>
       </Form>
     </div>
