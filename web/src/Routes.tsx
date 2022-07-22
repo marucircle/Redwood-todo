@@ -11,6 +11,7 @@ import { Router, Route, Set, Private } from '@redwoodjs/router'
 
 import StandardLayout from './layouts/StandardLayout'
 import TodoLayout from './layouts/TodoLayout'
+import CreateTag from './pages/CreateTag'
 import CreateTask from './pages/CreateTask'
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage'
 import LoginPage from './pages/LoginPage/LoginPage'
@@ -35,6 +36,7 @@ const Routes = () => {
         </Set>
         <Set wrap={[StandardLayout]}>
           <Route path="/task/create" page={CreateTask} name="createTask" />
+          <Route path="/tag/create" page={CreateTag} name="createTag" />
         </Set>
       </Private>
     </Router>
