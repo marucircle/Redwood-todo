@@ -8,23 +8,19 @@ import { useMutation } from '@redwoodjs/web'
 
 import { Loading as LoadingView } from 'src/components/Loading'
 import { Tag } from 'src/components/Tag'
+import { CREATE_TAG } from 'src/graphql/tag'
 
-export const CREATE_TAG = gql`
-  mutation CreateTagMutation($input: CreateTagInput!) {
-    createTag(input: $input) {
-      id
-      name
-      bg_color
-      text_color
-    }
-  }
-`
 const CreateTag = () => {
   const [color, setColor] = useState({
     bgColor: '#ffffff',
     textColor: '#000000',
   })
   const [tagText, setTagText] = useState('Tag')
+  const [create, { loading, error, data }] = useMutation(CREATE_TAG, {
+    onCompleted: () => {
+      alert('タグ登録に成功しました！')
+    },
+  })
   const onSubmit = () => {
     create({
       variables: {
@@ -37,14 +33,9 @@ const CreateTag = () => {
     })
   }
 
-  const [create, { loading, error }] = useMutation(CREATE_TAG, {
-    onCompleted: () => {
-      alert('タグ登録に成功しました！')
-    },
-  })
-
   return (
     <div>
+      {loading && <LoadingView />}
       <div className="my-4">
         <span className="bg-info px-4 mx-4 py-2">
           <Link to={routes.createTag()}>Back</Link>
