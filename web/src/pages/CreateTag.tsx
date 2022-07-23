@@ -4,9 +4,21 @@ import { CompactPicker } from 'react-color'
 
 import { FieldError, Form, Label, TextField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
 
+import { Loading as LoadingView } from 'src/components/Loading'
 import { Tag } from 'src/components/Tag'
 
+export const CREATE_TAG = gql`
+  mutation CreateTagMutation($input: CreateTagInput!) {
+    createTag(input: $input) {
+      id
+      name
+      bg_color
+      text_color
+    }
+  }
+`
 const CreateTag = () => {
   const [color, setColor] = useState({
     bgColor: '#ffffff',
@@ -14,8 +26,22 @@ const CreateTag = () => {
   })
   const [tagText, setTagText] = useState('Tag')
   const onSubmit = () => {
-    console.log('test')
+    create({
+      variables: {
+        input: {
+          name: tagText,
+          bg_color: color.bgColor,
+          text_color: color.textColor,
+        },
+      },
+    })
   }
+
+  const [create, { loading, error }] = useMutation(CREATE_TAG, {
+    onCompleted: () => {
+      alert('タグ登録に成功しました！')
+    },
+  })
 
   return (
     <div>
