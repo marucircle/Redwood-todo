@@ -58,7 +58,7 @@ export const createTag: MutationResolvers['createTag'] = ({ input }) => {
     }
   })
   return db.tag.create({
-    data: input,
+    data: { ...input, user_id: context.currentUser.id },
   })
 }
 
