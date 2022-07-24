@@ -4,11 +4,12 @@ import { CompactPicker } from 'react-color'
 
 import { FieldError, Form, Label, TextField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
-import { useMutation } from '@redwoodjs/web'
 
 import { Loading as LoadingView } from 'src/components/Loading'
-import { Tag } from 'src/components/Tag'
-import { CREATE_TAG } from 'src/graphql/tag'
+import { Tag as TagComponent } from 'src/components/Tag'
+import { useCreateTag } from 'src/hooks/tags/useCreateTag'
+import { useGetTagAll } from 'src/hooks/tags/useGetTagAll'
+import { Tag } from 'src/types'
 
 const CreateTag = () => {
   const [color, setColor] = useState({
@@ -16,11 +17,10 @@ const CreateTag = () => {
     textColor: '#000000',
   })
   const [tagText, setTagText] = useState('Tag')
-  const [create, { loading, error, data }] = useMutation(CREATE_TAG, {
-    onCompleted: () => {
-      alert('タグ登録に成功しました！')
-    },
-  })
+  const { create, createTagLoading, createTagError } = useCreateTag()
+
+  const { tags, getTagsLoading, getTagsError } = useGetTagAll()
+
   const onSubmit = () => {
     create({
       variables: {
@@ -32,10 +32,11 @@ const CreateTag = () => {
       },
     })
   }
+  console.log(tags)
 
   return (
     <div>
-      {loading && <LoadingView />}
+      {createTagLoading && <LoadingView />}
       <div className="my-4">
         <span className="bg-info px-4 mx-4 py-2">
           <Link to={routes.createTag()}>Back</Link>
@@ -45,6 +46,18 @@ const CreateTag = () => {
         onSubmit={onSubmit}
         className="mt-12 grid justify-items-center grid-cols-1"
       >
+        <div className=" w-3/4 my-8 flex flex-row gap-x-8 items-baseline">
+          <Label name="name" className="mb-2 font-bold">
+            タグ
+          </Label>
+          <div className="flex flex-row gap-x-2">
+            {!getTagsLoading &&
+              tags &&
+              tags.map((tag: Tag) => {
+                return <TagComponent key={tag.id} tag={tag} />
+              })}
+          </div>
+        </div>
         <div className="w-3/4 my-4 grid grid-cols-form-input items-baseline gap-x-8">
           <Label name="name" className="mb-2 font-bold">
             Task Name
@@ -91,7 +104,7 @@ const CreateTag = () => {
         </div>
         <div className="w-3/4 my-4 grid grid-cols-color-input items-center gap-x-8">
           <div className="mb-2 font-bold">Preview</div>
-          <Tag
+          <TagComponent
             tag={{
               name: tagText,
               text_color: color.textColor,
