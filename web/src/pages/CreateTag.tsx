@@ -46,9 +46,9 @@ const CreateTag = () => {
         onSubmit={onSubmit}
         className="mt-12 grid justify-items-center grid-cols-1"
       >
-        <div className=" w-3/4 my-8 flex flex-row gap-x-8 items-baseline">
+        <div className=" w-3/4 my-8 grid grid-cols-form-input items-baseline gap-x-8">
           <Label name="name" className="mb-2 font-bold">
-            タグ
+            登録済みタグ
           </Label>
           <div className="flex flex-row gap-x-2">
             {!getTagsLoading &&
@@ -60,7 +60,7 @@ const CreateTag = () => {
         </div>
         <div className="w-3/4 my-4 grid grid-cols-form-input items-baseline gap-x-8">
           <Label name="name" className="mb-2 font-bold">
-            Task Name
+            Tag Name
           </Label>
           <div className="flex flex-col">
             <TextField
