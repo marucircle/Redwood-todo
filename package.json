@@ -10,6 +10,7 @@
   "scripts": {
     "web": "yarn workspace web",
     "api": "yarn workspace api",
+    "type-generate":"yarn rw g types",
     "storybook": "yarn rw storybook"
   },
   "devDependencies": {
