@@ -1,5 +1,5 @@
 export const GET_TAGS = gql`
-  query GetTagQuery {
+  query GetTagsQuery {
     tags {
       id
       name
