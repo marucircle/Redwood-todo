@@ -17,9 +17,9 @@ const CreateTag = () => {
     textColor: '#000000',
   })
   const [tagText, setTagText] = useState('Tag')
-  const { create, createTagLoading, createTagError } = useCreateTag()
+  const { create, createTagLoading } = useCreateTag()
 
-  const { tags, getTagsLoading, getTagsError } = useGetTagAll()
+  const { tags, getTagsLoading } = useGetTagAll()
 
   const onSubmit = () => {
     create({
