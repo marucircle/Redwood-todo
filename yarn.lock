@@ -10609,13 +10609,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.1.1":
-  version: 1.2.1
-  resolution: "clsx@npm:1.2.1"
-  checksum: 34dead8bee24f5e96f6e7937d711978380647e936a22e76380290e35486afd8634966ce300fc4b74a32f3762c7d4c0303f442c3e259f4ce02374eb0c82834f27
-  languageName: node
-  linkType: hard
-
 "co@npm:^4.6.0":
   version: 4.6.0
   resolution: "co@npm:4.6.0"
@@ -22495,18 +22488,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^9.0.7":
-  version: 9.0.7
-  resolution: "react-toastify@npm:9.0.7"
-  dependencies:
-    clsx: ^1.1.1
-  peerDependencies:
-    react: ">=16"
-    react-dom: ">=16"
-  checksum: e3855be40e6a7d07c579e72e42ba079730092add4a52a377645747a3cb42b3e6b117070e0da8096d10680af9b89e6da6cd1a6ffa9b49b3a6449587e0f52956b6
-  languageName: node
-  linkType: hard
-
 "react-transition-group@npm:^4.4.0":
   version: 4.4.2
   resolution: "react-transition-group@npm:4.4.2"
@@ -26518,7 +26499,6 @@ __metadata:
     react-dom: 17.0.2
     react-loader-spinner: ^5.1.5
     react-markdown: ^8.0.3
-    react-toastify: ^9.0.7
     remark-gfm: ^3.0.1
     tailwindcss: ^3.1.4
   languageName: unknown
