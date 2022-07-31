@@ -3,21 +3,44 @@ import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
-import { Form, Label, TextAreaField, TextField } from '@redwoodjs/forms'
+import {
+  Form,
+  Label,
+  SelectField,
+  TextAreaField,
+  TextField,
+} from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 
 import { SelectTagModal } from 'src/components/containers/SelectTagModal'
+import { Loading as LoadingView } from 'src/components/Loading'
 import { CreateTaskViewTag, NewTag } from 'src/components/Tag'
+import { useCreateTask } from 'src/hooks/tasks/useCreateTask'
 import { Tag } from 'src/types'
+
+type createTaskForm = {
+  name: string
+  priority: number
+}
 
 const CreateTask = () => {
   const [isEdit, setIsEdit] = useState(true)
   const [markdownData, setMarkdownData] = useState('')
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const { create, createTaskLoading } = useCreateTask()
   const [tags, setTags] = useState<Tag[]>([])
 
-  const onSubmit = () => {
-    console.log('submit!')
+  const onSubmit = (data: createTaskForm) => {
+    create({
+      variables: {
+        input: {
+          name: data.name,
+          priority: data.priority,
+          detail: markdownData,
+          tags: tags,
+        },
+      },
+    })
   }
 
   const handleChangeTag = (tag: Tag) => {
@@ -32,6 +55,7 @@ const CreateTask = () => {
 
   return (
     <div>
+      {createTaskLoading && <LoadingView />}
       {isOpenModal && (
         <SelectTagModal
           onClose={() => setIsOpenModal(false)}
@@ -54,7 +78,8 @@ const CreateTask = () => {
           </Label>
           <TextField
             name="name"
-            className="py-2 px-4 grow shadow-md rounded-md"
+            className="py-2 px-2 grow shadow-md rounded-md"
+            validation={{ required: true }}
           />
         </div>
         <div className=" w-3/4 my-8 grid grid-cols-form-input gap-x-8 items-baseline">
@@ -72,6 +97,29 @@ const CreateTask = () => {
             <NewTag onClick={() => setIsOpenModal(true)} />
           </div>
         </div>
+        <div className="w-3/4 my-4 grid grid-cols-form-input items-baseline gap-x-8">
+          <Label name="priority" className="mb-2 font-bold">
+            優先度
+          </Label>
+          <SelectField
+            name="priority"
+            className="py-2 px-1 grow shadow-md rounded-md"
+            validation={{
+              required: true,
+              valueAsNumber: true,
+              validate: {
+                matchesInitialValue: (value) => {
+                  return value !== '-'
+                },
+              },
+            }}
+          >
+            <option>-</option>
+            <option value={1}>Low</option>
+            <option value={2}>Medium</option>
+            <option value={3}>High</option>
+          </SelectField>
+        </div>
         <div className="w-3/4 my-4 items-center">
           <Label name="detail" className="mb-2 font-bold">
             タスク内容
@@ -84,6 +132,7 @@ const CreateTask = () => {
               name="detail"
               value={markdownData}
               onChange={(e) => setMarkdownData(e.target.value)}
+              validation={{ required: true }}
               className="py-4 px-4 w-full shadow-md rounded-md"
               rows={10}
             ></TextAreaField>
@@ -97,6 +146,11 @@ const CreateTask = () => {
               </ReactMarkdown>
             </div>
           )}
+        </div>
+        <div className="my-4 flex justify-center">
+          <button className="bg-info px-4 mx-4 py-2" type="submit">
+            Create Task
+          </button>
         </div>
       </Form>
     </div>
