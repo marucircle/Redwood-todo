@@ -15,6 +15,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { SelectTagModal } from 'src/components/containers/SelectTagModal'
 import { Loading as LoadingView } from 'src/components/Loading'
 import { CreateTaskViewTag, NewTag } from 'src/components/Tag'
+import { useGetTagAll } from 'src/hooks/tags/useGetTagAll'
 import { useCreateTask } from 'src/hooks/tasks/useCreateTask'
 import { Tag } from 'src/types'
 
@@ -29,6 +30,7 @@ const CreateTask = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const { create, createTaskLoading } = useCreateTask()
   const [tags, setTags] = useState<Tag[]>([])
+  const { tags: registeredTags, getTagsLoading } = useGetTagAll()
 
   const onSubmit = (data: createTaskForm) => {
     create({
@@ -37,7 +39,7 @@ const CreateTask = () => {
           name: data.name,
           priority: data.priority,
           detail: markdownData,
-          tags: tags,
+          tags: tags.map((tag) => tag.id),
         },
       },
     })
@@ -53,6 +55,8 @@ const CreateTask = () => {
     }
   }
 
+  if (getTagsLoading) return <LoadingView />
+
   return (
     <div>
       {createTaskLoading && <LoadingView />}
@@ -61,6 +65,7 @@ const CreateTask = () => {
           onClose={() => setIsOpenModal(false)}
           setTag={(tag) => handleChangeTag(tag)}
           currentSelectTags={tags}
+          registeredTags={registeredTags}
         />
       )}
       <div className="my-4">

@@ -35,6 +35,5 @@ export const CREATE_TASK = gql`
       is_archived
       created_at
     }
-    }
   }
 `

@@ -604,6 +604,10 @@ video {
   margin-top: 3rem;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .flex {
   display: flex;
 }
