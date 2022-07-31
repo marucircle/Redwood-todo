@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast'
+
 import { useMutation } from '@redwoodjs/web'
 
 import { CREATE_TASK } from 'src/graphql/task'
@@ -6,7 +8,10 @@ import { Task } from 'src/types'
 export const useCreateTask = () => {
   const [create, { loading, error, data }] = useMutation<Task>(CREATE_TASK, {
     onCompleted: () => {
-      alert('タスク登録に成功しました！')
+      toast.success('タスク登録に成功しました！')
+    },
+    onError: () => {
+      toast.error('タグ取得に失敗しました...。')
     },
   })
 
