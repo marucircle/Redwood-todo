@@ -11,8 +11,13 @@ import { organizeErrorMessage } from 'src/utils/organizeErrorMessage'
 import { colorCodeValidation } from 'src/validations/colorCodeValidation'
 import { stringValidation } from 'src/validations/stringValidation'
 
+import { hasTag } from './tags.validation'
+
 export const tags: QueryResolvers['tags'] = () => {
   return db.tag.findMany({
+    where: {
+      user_id: context.currentUser.id,
+    },
     include: {
       tasks: true,
     },
@@ -32,6 +37,7 @@ export const createTag: MutationResolvers['createTag'] = ({ input }) => {
   validateWith(() => {
     let ok = true
     const messages = []
+
     let validate_result = stringValidation(input.name, 'name', 100)
     if (!validate_result.ok) {
       ok = false
@@ -52,7 +58,7 @@ export const createTag: MutationResolvers['createTag'] = ({ input }) => {
     }
   })
   return db.tag.create({
-    data: input,
+    data: { ...input, user_id: context.currentUser.id },
   })
 }
 
@@ -60,6 +66,10 @@ export const updateTag: MutationResolvers['updateTag'] = ({ id, input }) => {
   validateWith(() => {
     let ok = true
     const messages = []
+
+    if (!hasTag(context.currentUser.id, id))
+      throw organizeErrorMessage(['更新権限のないタグです'])
+
     let validate_result = stringValidation(input.name, 'name', 100)
     if (!validate_result.ok) {
       ok = false
@@ -86,6 +96,8 @@ export const updateTag: MutationResolvers['updateTag'] = ({ id, input }) => {
 }
 
 export const deleteTag: MutationResolvers['deleteTag'] = ({ id }) => {
+  if (!hasTag(context.currentUser.id, id))
+    throw organizeErrorMessage(['削除権限のないタグです'])
   return db.tag.delete({
     where: { id },
   })

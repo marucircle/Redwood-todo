@@ -19,7 +19,6 @@ export const schema = gql`
     name: String!
     bg_color: String!
     text_color: String!
-    user_id: Int!
   }
 
   input UpdateTagInput {

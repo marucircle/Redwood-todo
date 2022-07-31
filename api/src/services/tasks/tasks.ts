@@ -10,8 +10,13 @@ import { db } from 'src/lib/db'
 import { organizeErrorMessage } from 'src/utils/organizeErrorMessage'
 import { stringValidation } from 'src/validations/stringValidation'
 
+import { hasTask } from './tasks.validation'
+
 export const tasks: QueryResolvers['tasks'] = () => {
   return db.task.findMany({
+    where: {
+      user_id: context.currentUser.id,
+    },
     include: {
       tags: true,
     },
@@ -19,6 +24,8 @@ export const tasks: QueryResolvers['tasks'] = () => {
 }
 
 export const task: QueryResolvers['task'] = ({ id }) => {
+  if (!hasTask(context.currentUser.id, id))
+    throw organizeErrorMessage(['参照権限のないタスクです'])
   return db.task.findUnique({
     where: { id },
     include: {
@@ -55,6 +62,7 @@ export const createTask: MutationResolvers['createTask'] = ({ input }) => {
           return { id: tag_id }
         }),
       },
+      user_id: context.currentUser.id,
     },
   })
 }
@@ -63,6 +71,10 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
   validateWith(() => {
     let ok = true
     const messages = []
+
+    if (!hasTask(context.currentUser.id, id))
+      throw organizeErrorMessage(['更新権限のないタスクです'])
+
     let validate_result = stringValidation(input.name, 'name', 100)
     if (!validate_result.ok) {
       ok = false
@@ -94,6 +106,10 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
 export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
   id,
 }) => {
+  validateWith(() => {
+    if (!hasTask(context.currentUser.id, id))
+      throw organizeErrorMessage(['更新権限のないタスクです'])
+  })
   const previous = await db.task.findUnique({ where: { id } })
   return await db.task.update({
     data: { is_checked: !previous.is_checked },
@@ -103,6 +119,10 @@ export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
 
 export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
   async ({ id }) => {
+    validateWith(() => {
+      if (!hasTask(context.currentUser.id, id))
+        throw organizeErrorMessage(['更新権限のないタスクです'])
+    })
     const previous = await db.task.findUnique({ where: { id } })
     return await db.task.update({
       data: { is_archived: !previous.is_archived },
@@ -111,6 +131,10 @@ export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
   }
 
 export const deleteTask: MutationResolvers['deleteTask'] = ({ id }) => {
+  validateWith(() => {
+    if (!hasTask(context.currentUser.id, id))
+      throw organizeErrorMessage(['削除権限のないタスクです'])
+  })
   return db.task.delete({
     where: { id },
   })

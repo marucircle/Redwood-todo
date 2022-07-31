@@ -1,5 +1,6 @@
 import { CheckOutlined, Delete, FormatListBulleted } from '@material-ui/icons'
 
+import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
 
 type TodoLayoutProps = {
@@ -7,6 +8,7 @@ type TodoLayoutProps = {
 }
 
 const TodoLayout = ({ children }: TodoLayoutProps) => {
+  const { logOut } = useAuth()
   return (
     <div className="flex flex-col h-screen">
       <header className="p-4 bg-pure-white">
@@ -43,6 +45,16 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
               </Link>
             </li>
           </ul>
+          <Link
+            to={routes.createTask()}
+            className="flex justify-center bg-info mx-8 py-2 my-16"
+          >
+            New Task
+          </Link>
+          <div className="flex gap-x-4 px-4 my-16" onClick={logOut}>
+            <CheckOutlined />
+            <span>Logout</span>
+          </div>
         </nav>
         <main className="flex-auto p-4 bg-white shadow-inner">{children}</main>
       </div>

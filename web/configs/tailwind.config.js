@@ -8,6 +8,13 @@ module.exports = {
         tb: '1200px',
         pc: '9999px',
       },
+      gridTemplateColumns: {
+        'form-input': '120px 1fr',
+        'color-input': '120px max-content',
+      },
+      gridTemplateRows: {
+        'form-input': 'max-content 1fr',
+      },
       colors: {
         'pure-white': '#ffffff',
         white: '#fafafa',
@@ -25,7 +32,10 @@ module.exports = {
         'medium-title': '20px',
         'large-title': '24px',
       },
-      zIndex: {},
+      zIndex: {
+        overlay: 50,
+        modal: 100,
+      },
       spacing: {
         px: '1px',
         0: '0',
