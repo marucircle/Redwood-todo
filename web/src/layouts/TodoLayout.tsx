@@ -10,11 +10,11 @@ type TodoLayoutProps = {
 const TodoLayout = ({ children }: TodoLayoutProps) => {
   const { logOut } = useAuth()
   return (
-    <div className="flex flex-col h-screen">
-      <header className="p-4 bg-pure-white">
+    <div className="flex flex-col">
+      <header className="flex items-center h-header bg-pure-white px-4">
         <h1 className="text-large-title font-bold">Redwood Todo</h1>
       </header>
-      <div className="flex flex-auto">
+      <div className="flex flex-auto h-full">
         <nav className="w-52 py-4">
           <ul className="grid gap-y-4">
             <li>
@@ -56,7 +56,9 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
             <span>Logout</span>
           </div>
         </nav>
-        <main className="flex-auto p-4 bg-white shadow-inner">{children}</main>
+        <main className="flex-auto p-4 bg-white shadow-inner overflow-y-scroll h-task-list">
+          {children}
+        </main>
       </div>
     </div>
   )

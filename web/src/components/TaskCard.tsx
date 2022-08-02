@@ -9,7 +9,7 @@ export type TaskCardProps = {
 
 export const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
   return (
-    <div className="rounded-md bg-pure-white shadow-lg p-4 grid">
+    <div className="rounded-md bg-pure-white shadow-lg p-4 grid grid-row-1">
       {!task.is_archived && (
         <div
           className={classNames(
@@ -19,13 +19,9 @@ export const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
         />
       )}
       <div className="text-medium-title font-bold pt-2">{task.name}</div>
-      <div className="py-2">
+      <div className="flex flex-wrap gap-x-2 gap-y-2">
         {task.tags.map((tag, index) => {
-          return (
-            <span key={index} className="pr-2">
-              <Tag tag={tag} />
-            </span>
-          )
+          return <Tag key={index} tag={tag} />
         })}
       </div>
       {task.description && <div className="py-2">{task.description}</div>}
