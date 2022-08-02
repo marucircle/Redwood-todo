@@ -628,6 +628,10 @@ video {
   height: 100vh;
 }
 
+.h-header {
+  height: 4.5rem;
+}
+
 .h-2 {
   height: 0.5rem;
 }
@@ -706,6 +710,10 @@ video {
        column-gap: 0.5rem;
 }
 
+.gap-y-2 {
+  row-gap: 0.5rem;
+}
+
 .gap-y-4 {
   row-gap: 1rem;
 }
@@ -718,6 +726,10 @@ video {
 .gap-x-8 {
   -moz-column-gap: 2rem;
        column-gap: 2rem;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .rounded-sm {
@@ -796,12 +808,13 @@ video {
   padding-right: 0.25rem;
 }
 
-.pt-2 {
-  padding-top: 0.5rem;
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-.pr-2 {
-  padding-right: 0.5rem;
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 .pt-4 {
@@ -949,4 +962,12 @@ h6 {
 pre{
   background-color:#dddddd;
   padding:10px;
+}
+
+body{
+  overflow-y:hidden
+}
+
+.h-task-list{
+  height:calc(100vh - 4.5rem)
 }
