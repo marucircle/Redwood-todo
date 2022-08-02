@@ -19,7 +19,7 @@ export const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
         />
       )}
       <div className="text-medium-title font-bold pt-2">{task.name}</div>
-      <div className="flex flex-wrap gap-x-2 gap-y-2">
+      <div className="flex flex-wrap gap-x-2 gap-y-2 py-2">
         {task.tags.map((tag, index) => {
           return <Tag key={index} tag={tag} />
         })}
