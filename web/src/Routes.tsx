@@ -17,6 +17,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage'
 import SignupPage from './pages/SignupPage/SignupPage'
+import TaskDetail from './pages/TaskDetail'
 import Tasks from './pages/Tasks'
 
 const Routes = () => {
@@ -37,6 +38,7 @@ const Routes = () => {
         <Set wrap={[StandardLayout]}>
           <Route path="/task/create" page={CreateTask} name="createTask" />
           <Route path="/tag/create" page={CreateTag} name="createTag" />
+          <Route path="/task/{id:number}" page={TaskDetail} name="taskDetail" />
         </Set>
       </Private>
     </Router>
