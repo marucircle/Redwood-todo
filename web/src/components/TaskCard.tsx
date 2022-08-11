@@ -7,9 +7,13 @@ import { Tag } from './Tag'
 
 export type TaskCardProps = {
   task: Task
+  onChangeCheck: () => void
 }
 
-export const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
+export const TaskCard = ({
+  task,
+  onChangeCheck,
+}: TaskCardProps): JSX.Element => {
   return (
     <div className="rounded-md bg-pure-white shadow-lg p-4 grid grid-row-1">
       {!task.is_archived && (
@@ -18,6 +22,7 @@ export const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
             'checkbox',
             task.is_checked && 'checkbox_is_checked'
           )}
+          onClick={onChangeCheck}
         />
       )}
       <div className="text-medium-title font-bold pt-2">{task.name}</div>
