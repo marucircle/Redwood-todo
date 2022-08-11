@@ -32,14 +32,13 @@ const CreateTag = () => {
       },
     })
   }
-  console.log(tags)
 
   return (
     <div>
       {createTagLoading && <LoadingView />}
       <div className="my-4">
         <span className="bg-info px-4 mx-4 py-2">
-          <Link to={routes.createTag()}>Back</Link>
+          <Link to={routes.task()}>Back</Link>
         </span>
       </div>
       <Form
