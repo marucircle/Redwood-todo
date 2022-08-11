@@ -32,7 +32,6 @@ const CreateTag = () => {
       },
     })
   }
-  console.log(tags)
 
   return (
     <div>
