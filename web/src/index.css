@@ -604,6 +604,10 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .mb-8 {
   margin-bottom: 2rem;
 }
@@ -622,10 +626,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .h-header {
@@ -962,10 +962,6 @@ h6 {
 pre{
   background-color:#dddddd;
   padding:10px;
-}
-
-body{
-  overflow-y:hidden
 }
 
 .h-task-list{
