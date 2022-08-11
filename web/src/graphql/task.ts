@@ -58,6 +58,26 @@ export const UPDATE_CHECK_TASK = gql`
   }
 `
 
+export const UPDATE_ARCHIVE_TASK = gql`
+  mutation UpdateArchiveTask($id: Int!) {
+    updateArchiveTask(id: $id) {
+      id
+      name
+      detail
+      priority
+      tags {
+        id
+        name
+        bg_color
+        text_color
+      }
+      is_checked
+      is_archived
+      created_at
+    }
+  }
+`
+
 export const CREATE_TASK = gql`
   mutation CreateTaskMutation($input: CreateTaskInput!) {
     createTask(input: $input) {

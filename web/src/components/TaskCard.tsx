@@ -8,13 +8,13 @@ import { Tag } from './Tag'
 export type TaskCardProps = {
   task: Task
   onChangeCheck: () => void
-  onDelete: () => void
+  onChangeArchive: () => void
 }
 
 export const TaskCard = ({
   task,
   onChangeCheck,
-  onDelete,
+  onChangeArchive,
 }: TaskCardProps): JSX.Element => {
   return (
     <div className="rounded-md bg-pure-white shadow-lg p-4 grid grid-row-1">
@@ -39,13 +39,16 @@ export const TaskCard = ({
           <Link to={routes.taskDetail({ id: task.id })}>詳細を見る</Link>
         </div>
         {task.is_archived ? (
-          <div className="button text-medium-title bg-green text-white">
+          <div
+            className="button text-medium-title bg-green text-white"
+            onClick={onChangeArchive}
+          >
             元に戻す
           </div>
         ) : (
           <div
             className="button text-medium-title bg-danger text-white"
-            onClick={onDelete}
+            onClick={onChangeArchive}
           >
             削除する
           </div>
