@@ -8,11 +8,13 @@ import { Tag } from './Tag'
 export type TaskCardProps = {
   task: Task
   onChangeCheck: () => void
+  onDelete: () => void
 }
 
 export const TaskCard = ({
   task,
   onChangeCheck,
+  onDelete,
 }: TaskCardProps): JSX.Element => {
   return (
     <div className="rounded-md bg-pure-white shadow-lg p-4 grid grid-row-1">
@@ -41,7 +43,10 @@ export const TaskCard = ({
             元に戻す
           </div>
         ) : (
-          <div className="button text-medium-title bg-danger text-white">
+          <div
+            className="button text-medium-title bg-danger text-white"
+            onClick={onDelete}
+          >
             削除する
           </div>
         )}
