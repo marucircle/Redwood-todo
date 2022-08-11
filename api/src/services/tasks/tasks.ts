@@ -64,6 +64,9 @@ export const createTask: MutationResolvers['createTask'] = ({ input }) => {
       },
       user_id: context.currentUser.id,
     },
+    include: {
+      tags: true,
+    },
   })
 }
 
@@ -100,6 +103,9 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
       },
     },
     where: { id },
+    include: {
+      tags: true,
+    },
   })
 }
 
@@ -114,6 +120,9 @@ export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
   return await db.task.update({
     data: { is_checked: !previous.is_checked },
     where: { id },
+    include: {
+      tags: true,
+    },
   })
 }
 
@@ -127,6 +136,9 @@ export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
     return await db.task.update({
       data: { is_archived: !previous.is_archived },
       where: { id },
+      include: {
+        tags: true,
+      },
     })
   }
 

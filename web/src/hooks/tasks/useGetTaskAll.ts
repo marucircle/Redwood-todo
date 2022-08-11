@@ -10,11 +10,12 @@ export const useGetTaskAll = () => {
     data,
     error: getTasksError,
     loading: getTasksLoading,
+    refetch: getTasksRefetch,
   } = useQuery<{ tasks?: Task[] }>(GET_TASKS, {
     onError: () => {
       toast.error('タスク一覧の取得に失敗しました...。')
     },
   })
 
-  return { tasks: data?.tasks, getTasksError, getTasksLoading }
+  return { tasks: data?.tasks, getTasksError, getTasksLoading, getTasksRefetch }
 }
