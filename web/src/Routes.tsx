@@ -38,7 +38,7 @@ const Routes = () => {
         <Set wrap={[StandardLayout]}>
           <Route path="/task/create" page={CreateTask} name="createTask" />
           <Route path="/tag/create" page={CreateTag} name="createTag" />
-          <Route path="/task/{id:number}" page={TaskDetail} name="taskDetail" />
+          <Route path="/task/{id:Int}" page={TaskDetail} name="taskDetail" />
         </Set>
       </Private>
     </Router>

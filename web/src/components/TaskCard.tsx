@@ -1,3 +1,5 @@
+import { Link, routes } from '@redwoodjs/router'
+
 import { Task } from 'src/types'
 import { classNames } from 'src/utils/classNames'
 
@@ -27,7 +29,7 @@ export const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
       {task.description && <div className="py-2">{task.description}</div>}
       <div className="pt-4 flex justify-around">
         <div className="button text-medium-title bg-info text-white">
-          詳細を見る
+          <Link to={routes.taskDetail({ id: task.id })}>詳細を見る</Link>
         </div>
         {task.is_archived ? (
           <div className="button text-medium-title bg-green text-white">
