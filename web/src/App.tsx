@@ -9,15 +9,18 @@ import Routes from 'src/Routes'
 
 import './scaffold.css'
 import './index.css'
+import { TaskFilterProvider } from './contexts/TaskFilterContext'
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
       <AuthProvider type="dbAuth">
-        <RedwoodApolloProvider>
-          <Toaster />
-          <Routes />
-        </RedwoodApolloProvider>
+        <TaskFilterProvider>
+          <RedwoodApolloProvider>
+            <Toaster />
+            <Routes />
+          </RedwoodApolloProvider>
+        </TaskFilterProvider>
       </AuthProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>
