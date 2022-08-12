@@ -1,43 +1,73 @@
-import { useParams, routes, Redirect } from '@redwoodjs/router'
+import { useContext } from 'react'
 
 import { Loading as LoadingView } from 'src/components/Loading'
 import { TaskCard } from 'src/components/TaskCard'
+import { TaskFilterContext } from 'src/contexts/TaskFilterContext'
+import { useGetTagAll } from 'src/hooks/tags/useGetTagAll'
 import { useGetTaskAll } from 'src/hooks/tasks/useGetTaskAll'
 import { useUpdateArchiveTask } from 'src/hooks/tasks/useUpdateArchiveTask'
 import { useUpdateCheckTask } from 'src/hooks/tasks/useUpdateCheckTask'
-
-import { isViewMode } from '../utils/isViewMode'
-
 const Tasks = () => {
-  const { mode = 'all' } = useParams()
-  const { tasks, getTasksLoading } = useGetTaskAll()
+  const { taskFilterState, taskFilterDispatch } = useContext(TaskFilterContext)
+  const { tasks, getTasksLoading, getTasksRefetch } =
+    useGetTaskAll(taskFilterState)
+  const { tags, getTagsLoading } = useGetTagAll()
   const { update: updateCheckTask } = useUpdateCheckTask()
   const { update: updateArchiveTask } = useUpdateArchiveTask()
 
-  const onCheck = async (id: number) => {
-    updateCheckTask({ variables: { id } })
-  }
-
-  if (!isViewMode(mode)) {
-    return <Redirect to={routes.task()} />
-  }
-
-  if (getTasksLoading) return <LoadingView></LoadingView>
+  if (getTasksLoading || getTagsLoading) return <LoadingView></LoadingView>
 
   return (
-    <div className="grid grid-cols-1 gap-y-4 gap-x-8 px-8">
-      {tasks.map((task) => {
-        return (
-          <TaskCard
-            key={task.id}
-            task={task}
-            onChangeCheck={() => onCheck(task.id)}
-            onChangeArchive={() => {
-              updateArchiveTask({ variables: { id: task.id } })
-            }}
-          />
-        )
-      })}
+    <div className="px-8">
+      <div>
+        <label htmlFor="tagFilter" className="mb-2 font-bold">
+          タグ絞り込み：
+        </label>
+        <select
+          id="tagFilter"
+          onChange={(e) => {
+            taskFilterDispatch({
+              type: 'CHANGE_FILTER_TAG',
+              tagName: e.target.value,
+            })
+          }}
+          value={taskFilterState.tagName}
+          className="py-2 px-1 grow shadow-md rounded-md"
+        >
+          <option key="all" value="">
+            -
+          </option>
+          {tags.map((tag) => (
+            <option key={tag.id} value={tag.name}>
+              {tag.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="grid grid-cols-1 gap-y-4 gap-x-8 mt-4">
+        {tasks.map((task) => {
+          return (
+            <TaskCard
+              key={task.id}
+              task={task}
+              onClickTag={(tagName) =>
+                taskFilterDispatch({
+                  type: 'CHANGE_FILTER_TAG',
+                  tagName: tagName,
+                })
+              }
+              onChangeCheck={async () => {
+                await updateCheckTask({ variables: { id: task.id } })
+                getTasksRefetch()
+              }}
+              onChangeArchive={async () => {
+                await updateArchiveTask({ variables: { id: task.id } })
+                getTasksRefetch()
+              }}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }

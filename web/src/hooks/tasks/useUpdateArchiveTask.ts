@@ -11,11 +11,11 @@ export const useUpdateArchiveTask = () => {
     UPDATE_ARCHIVE_TASK,
     {
       onCompleted: () => {
-        toast.success('タスクのチェック更新に成功しました！')
+        toast.success('タスクのステータス更新に成功しました！')
         navigate(routes.task())
       },
       onError: () => {
-        toast.error('タスクのチェック更新に失敗しました...。')
+        toast.error('タスクのステータス更新に失敗しました...。')
       },
     }
   )
