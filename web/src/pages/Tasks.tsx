@@ -9,7 +9,8 @@ import { useUpdateArchiveTask } from 'src/hooks/tasks/useUpdateArchiveTask'
 import { useUpdateCheckTask } from 'src/hooks/tasks/useUpdateCheckTask'
 const Tasks = () => {
   const { taskFilterState, taskFilterDispatch } = useContext(TaskFilterContext)
-  const { tasks, getTasksLoading } = useGetTaskAll(taskFilterState)
+  const { tasks, getTasksLoading, getTasksRefetch } =
+    useGetTaskAll(taskFilterState)
   const { tags, getTagsLoading } = useGetTagAll()
   const { update: updateCheckTask } = useUpdateCheckTask()
   const { update: updateArchiveTask } = useUpdateArchiveTask()
@@ -25,7 +26,6 @@ const Tasks = () => {
         <select
           id="tagFilter"
           onChange={(e) => {
-            console.log(e.target.value)
             taskFilterDispatch({
               type: 'CHANGE_FILTER_TAG',
               tagName: e.target.value,
@@ -35,8 +35,7 @@ const Tasks = () => {
           className="py-2 px-1 grow shadow-md rounded-md"
         >
           <option key="all" value="">
-            {' '}
-            -{' '}
+            -
           </option>
           {tags.map((tag) => (
             <option key={tag.id} value={tag.name}>
@@ -51,11 +50,19 @@ const Tasks = () => {
             <TaskCard
               key={task.id}
               task={task}
-              onChangeCheck={() =>
-                updateCheckTask({ variables: { id: task.id } })
+              onClickTag={(tagName) =>
+                taskFilterDispatch({
+                  type: 'CHANGE_FILTER_TAG',
+                  tagName: tagName,
+                })
               }
-              onChangeArchive={() => {
-                updateArchiveTask({ variables: { id: task.id } })
+              onChangeCheck={async () => {
+                await updateCheckTask({ variables: { id: task.id } })
+                getTasksRefetch()
+              }}
+              onChangeArchive={async () => {
+                await updateArchiveTask({ variables: { id: task.id } })
+                getTasksRefetch()
               }}
             />
           )

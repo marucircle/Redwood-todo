@@ -17,10 +17,12 @@ export const tasks: QueryResolvers['tasks'] = async ({ mode, tag }) => {
     is_checked: mode === 'completed' ? true : undefined,
     is_archived: mode === 'archived' ? true : undefined,
   }
-  const tagFilter = await db.tag.findFirst({
-    where: { name: tag },
-    select: { id: true },
-  })
+  const tagFilter = tag
+    ? await db.tag.findFirst({
+        where: { name: tag },
+        select: { id: true },
+      })
+    : undefined
   return db.task.findMany({
     where: {
       user_id: context.currentUser.id,
