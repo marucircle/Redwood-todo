@@ -29,7 +29,7 @@ const TaskFilterReducer = (
       return { ...state, mode: action.mode }
 
     case 'CHANGE_FILTER_TAG':
-      return { ...state, tagName: state.tagName }
+      return { ...state, tagName: action.tagName }
     default:
       return state
   }
