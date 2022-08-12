@@ -9,15 +9,22 @@ export type TaskCardProps = {
   task: Task
   onChangeCheck: () => void
   onChangeArchive: () => void
+  onClickTag: (tagName: string) => void
 }
 
 export const TaskCard = ({
   task,
   onChangeCheck,
   onChangeArchive,
+  onClickTag,
 }: TaskCardProps): JSX.Element => {
   return (
-    <div className="rounded-md bg-pure-white shadow-lg p-4 grid grid-row-1">
+    <div
+      className={classNames(
+        'rounded-md shadow-lg p-4 grid grid-row-1',
+        task.is_archived ? 'bg-archived' : 'bg-pure-white'
+      )}
+    >
       {!task.is_archived && (
         <div
           className={classNames(
@@ -30,7 +37,15 @@ export const TaskCard = ({
       <div className="text-medium-title font-bold pt-2">{task.name}</div>
       <div className="flex flex-wrap gap-x-2 gap-y-2 py-2">
         {task.tags.map((tag, index) => {
-          return <Tag key={index} tag={tag} />
+          return (
+            <span
+              key={index}
+              onClick={() => onClickTag(tag.name)}
+              className="cursor-pointer"
+            >
+              <Tag tag={tag} />
+            </span>
+          )
         })}
       </div>
       {task.description && <div className="py-2">{task.description}</div>}

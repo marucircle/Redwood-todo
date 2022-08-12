@@ -12,10 +12,26 @@ import { stringValidation } from 'src/validations/stringValidation'
 
 import { hasTask } from './tasks.validation'
 
-export const tasks: QueryResolvers['tasks'] = () => {
+export const tasks: QueryResolvers['tasks'] = async ({ mode, tag }) => {
+  const modeFilter = {
+    is_checked: mode === 'completed' ? true : undefined,
+    is_archived: mode === 'archived' ? true : undefined,
+  }
+  const tagFilter = tag
+    ? await db.tag.findFirst({
+        where: { name: tag },
+        select: { id: true },
+      })
+    : undefined
   return db.task.findMany({
     where: {
       user_id: context.currentUser.id,
+      ...modeFilter,
+      tags: {
+        some: {
+          id: tagFilter?.id,
+        },
+      },
     },
     include: {
       tags: true,
