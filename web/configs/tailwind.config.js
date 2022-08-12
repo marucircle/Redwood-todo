@@ -22,6 +22,7 @@ module.exports = {
         green: '#5fd068',
         danger: '#ff0505',
         info: '#37e2d5',
+        archived: '#dddddd',
         checkbox: '#00ffab',
       },
       fontSize: {
