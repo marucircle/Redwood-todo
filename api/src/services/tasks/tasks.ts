@@ -23,20 +23,30 @@ export const tasks: QueryResolvers['tasks'] = async ({ mode, tag }) => {
         select: { id: true },
       })
     : undefined
-  return db.task.findMany({
-    where: {
-      user_id: context.currentUser.id,
-      ...modeFilter,
-      tags: {
-        some: {
-          id: tagFilter?.id,
+  return tagFilter
+    ? db.task.findMany({
+        where: {
+          user_id: context.currentUser.id,
+          ...modeFilter,
+          tags: {
+            some: {
+              id: tagFilter?.id,
+            },
+          },
         },
-      },
-    },
-    include: {
-      tags: true,
-    },
-  })
+        include: {
+          tags: true,
+        },
+      })
+    : db.task.findMany({
+        where: {
+          user_id: context.currentUser.id,
+          ...modeFilter,
+        },
+        include: {
+          tags: true,
+        },
+      })
 }
 
 export const task: QueryResolvers['task'] = ({ id }) => {
