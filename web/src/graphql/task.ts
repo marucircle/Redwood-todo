@@ -1,6 +1,6 @@
 export const GET_TASKS = gql`
-  query GetTasksQuery {
-    tasks {
+  query GetTasksQuery($mode: String, $tag: String) {
+    tasks(mode: $mode, tag: $tag) {
       id
       name
       detail

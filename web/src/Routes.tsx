@@ -32,7 +32,7 @@ const Routes = () => {
       </Set>
       <Private unauthenticated="login">
         <Set wrap={[TodoLayout]}>
-          <Route path="/tasks/{mode:String}" page={Tasks} name="tasks" />
+          <Route path="/tasks" page={Tasks} name="tasks" />
           <Route path="/tasks" page={Tasks} name="task" />
         </Set>
         <Set wrap={[StandardLayout]}>

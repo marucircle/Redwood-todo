@@ -1,25 +1,19 @@
-import { useParams, routes, Redirect } from '@redwoodjs/router'
+import { useContext } from 'react'
 
 import { Loading as LoadingView } from 'src/components/Loading'
 import { TaskCard } from 'src/components/TaskCard'
+import { TaskFilterContext } from 'src/contexts/TaskFilterContext'
 import { useGetTaskAll } from 'src/hooks/tasks/useGetTaskAll'
 import { useUpdateArchiveTask } from 'src/hooks/tasks/useUpdateArchiveTask'
 import { useUpdateCheckTask } from 'src/hooks/tasks/useUpdateCheckTask'
-
-import { isViewMode } from '../utils/isViewMode'
-
 const Tasks = () => {
-  const { mode = 'all' } = useParams()
-  const { tasks, getTasksLoading } = useGetTaskAll()
+  const { taskFilterState } = useContext(TaskFilterContext)
+  const { tasks, getTasksLoading } = useGetTaskAll(taskFilterState)
   const { update: updateCheckTask } = useUpdateCheckTask()
   const { update: updateArchiveTask } = useUpdateArchiveTask()
 
   const onCheck = async (id: number) => {
     updateCheckTask({ variables: { id } })
-  }
-
-  if (!isViewMode(mode)) {
-    return <Redirect to={routes.task()} />
   }
 
   if (getTasksLoading) return <LoadingView></LoadingView>

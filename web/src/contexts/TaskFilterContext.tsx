@@ -7,7 +7,7 @@ type TaskFilterActionType =
     }
   | { type: 'CHANGE_FILTER_TAG'; tagName: string }
 
-type TaskFilterStateType = { mode?: string; tagName?: string }
+export type TaskFilterStateType = { mode?: string; tagName?: string }
 
 type TaskFilterContextType = {
   taskFilterState: TaskFilterStateType
@@ -16,7 +16,7 @@ type TaskFilterContextType = {
 
 const taskFilterInitialState = {}
 
-const TaskFilterContext = React.createContext<TaskFilterContextType>(
+export const TaskFilterContext = React.createContext<TaskFilterContextType>(
   {} as TaskFilterContextType
 )
 
