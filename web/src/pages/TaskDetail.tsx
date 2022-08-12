@@ -15,6 +15,9 @@ const TaskDetail = () => {
   if (getTaskError) {
     return <Redirect to={routes.task()} />
   }
+
+  const blob = new Blob([task.detail])
+
   return (
     <div>
       <div className="my-4">
@@ -33,6 +36,16 @@ const TaskDetail = () => {
           <ReactMarkdown className="reactMarkDown" remarkPlugins={[remarkGfm]}>
             {task.detail}
           </ReactMarkdown>
+        </div>
+        <div className="mt-8 mb-8">
+          <span className="button text-medium-title bg-info text-white">
+            <a
+              href={window.URL.createObjectURL(blob)}
+              download={`${task.name}.md`}
+            >
+              Export
+            </a>
+          </span>
         </div>
       </div>
     </div>
