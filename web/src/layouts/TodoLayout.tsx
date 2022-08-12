@@ -26,7 +26,7 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
               onClick={() =>
                 taskFilterDispatch({ type: 'CHANGE_MODE', mode: 'all' })
               }
-              className="flex gap-x-4 px-4"
+              className="flex gap-x-4 px-4 cursor-pointer"
             >
               <FormatListBulleted />
               <span className="flex-auto">All</span>
@@ -35,7 +35,7 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
               onClick={() =>
                 taskFilterDispatch({ type: 'CHANGE_MODE', mode: 'archived' })
               }
-              className="flex gap-x-4 px-4"
+              className="flex gap-x-4 px-4 cursor-pointer"
             >
               <Delete />
               <span className="flex-auto">Archived</span>
@@ -44,7 +44,7 @@ const TodoLayout = ({ children }: TodoLayoutProps) => {
               onClick={() =>
                 taskFilterDispatch({ type: 'CHANGE_MODE', mode: 'completed' })
               }
-              className="flex gap-x-4 px-4"
+              className="flex gap-x-4 px-4 cursor-pointer"
             >
               <CheckOutlined />
               <span className="flex-auto">Completed</span>
