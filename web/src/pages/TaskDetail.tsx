@@ -16,7 +16,7 @@ const TaskDetail = () => {
     return <Redirect to={routes.task()} />
   }
 
-  const blob = new Blob([task.detail])
+  const mdFile = new Blob([task.detail])
 
   return (
     <div>
@@ -40,7 +40,7 @@ const TaskDetail = () => {
         <div className="mt-8 mb-8">
           <span className="button text-medium-title bg-info text-white">
             <a
-              href={window.URL.createObjectURL(blob)}
+              href={window.URL.createObjectURL(mdFile)}
               download={`${task.name}.md`}
             >
               Export
