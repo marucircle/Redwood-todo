@@ -14,7 +14,6 @@ export const tasks: QueryResolvers['tasks'] = async ({ mode, tag }) => {
     is_checked: mode === 'completed' ? true : undefined,
     is_archived: mode === 'archived' ? true : undefined,
   }
-  console.log('debug3')
   return db.user
     .findUnique({
       where: { id: context.currentUser.id },
@@ -111,12 +110,10 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
 export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
   id,
 }) => {
-  console.log('debug1s')
   const previous = await db.task.findFirst({
     where: { id, user_id: context.currentUser.id },
     select: { is_checked: true },
   })
-  console.log('debug2')
   validateWith(() => {
     if (!previous) throw organizeErrorMessage(['更新権限のないタスクです'])
   })
@@ -125,7 +122,6 @@ export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
     where: { id },
     include: { tags: true },
   })
-  console.log('debug updateTask end')
   return updated
 }
 
