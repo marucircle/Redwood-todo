@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import toast from 'react-hot-toast'
+
 import { Loading as LoadingView } from 'src/components/Loading'
 import { TaskCard } from 'src/components/TaskCard'
 import { TaskFilterContext } from 'src/contexts/TaskFilterContext'
@@ -12,10 +14,18 @@ const Tasks = () => {
   const { tasks, getTasksLoading, getTasksRefetch } =
     useGetTaskAll(taskFilterState)
   const { tags, getTagsLoading } = useGetTagAll()
-  const { update: updateCheckTask } = useUpdateCheckTask()
-  const { update: updateArchiveTask } = useUpdateArchiveTask()
+  const { update: updateCheckTask, updateCheckTaskLoading } =
+    useUpdateCheckTask()
+  const { update: updateArchiveTask, updateArchiveTaskLoading } =
+    useUpdateArchiveTask()
 
-  if (getTasksLoading || getTagsLoading) return <LoadingView></LoadingView>
+  if (
+    getTasksLoading ||
+    getTagsLoading ||
+    updateCheckTaskLoading ||
+    updateArchiveTaskLoading
+  )
+    return <LoadingView></LoadingView>
 
   return (
     <div className="px-8">
@@ -57,7 +67,9 @@ const Tasks = () => {
                 })
               }
               onChangeCheck={async () => {
+                const toastId = toast.loading('Loading...')
                 await updateCheckTask({ variables: { id: task.id } })
+                toast.dismiss(toastId)
                 getTasksRefetch()
               }}
               onChangeArchive={async () => {
