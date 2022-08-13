@@ -14,7 +14,7 @@ import { stringValidation } from 'src/validations/stringValidation'
 import { hasTag } from './tags.validation'
 
 export const tags: QueryResolvers['tags'] = () => {
-  return db.tag.findMany({
+  return db.user.findUnique({ where: { id: context.currentUser.id } }).tags({
     where: {
       user_id: context.currentUser.id,
     },
