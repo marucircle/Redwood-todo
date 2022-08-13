@@ -19,7 +19,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.task())
+      navigate(routes.tasks())
     }
   }, [isAuthenticated])
 

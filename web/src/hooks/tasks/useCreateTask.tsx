@@ -10,7 +10,7 @@ export const useCreateTask = () => {
   const [create, { loading, error, data }] = useMutation<Task>(CREATE_TASK, {
     onCompleted: () => {
       toast.success('タスク登録に成功しました！')
-      navigate(routes.task())
+      navigate(routes.tasks())
     },
     onError: () => {
       toast.error('タグ取得に失敗しました...。')

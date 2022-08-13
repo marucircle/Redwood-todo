@@ -12,7 +12,7 @@ export const useUpdateCheckTask = () => {
     {
       onCompleted: () => {
         toast.success('タスクのチェック更新に成功しました！')
-        navigate(routes.task())
+        navigate(routes.tasks())
       },
       onError: () => {
         toast.error('タスクのチェック更新に失敗しました...。')
