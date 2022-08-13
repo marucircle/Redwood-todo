@@ -11,7 +11,30 @@ import { logger } from './logger'
  * Instance of the Prisma Client
  */
 export const db = new PrismaClient({
-  log: emitLogLevels(['info', 'warn', 'error']),
+  log: [
+    {
+      emit: 'event',
+      level: 'query',
+    },
+    {
+      emit: 'stdout',
+      level: 'error',
+    },
+    {
+      emit: 'stdout',
+      level: 'info',
+    },
+    {
+      emit: 'stdout',
+      level: 'warn',
+    },
+  ],
+})
+
+db.$on('query', (e) => {
+  console.log('Query: ' + e.query)
+  console.log('Params: ' + e.params)
+  console.log('Duration: ' + e.duration + 'ms')
 })
 
 handlePrismaLogging({

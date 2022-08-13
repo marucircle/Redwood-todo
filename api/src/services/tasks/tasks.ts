@@ -5,6 +5,7 @@ import type {
 } from 'types/graphql'
 
 import { validateWith } from '@redwoodjs/api'
+import { context } from '@redwoodjs/graphql-server'
 
 import { db } from 'src/lib/db'
 import { organizeErrorMessage } from 'src/utils/organizeErrorMessage'
@@ -17,29 +18,17 @@ export const tasks: QueryResolvers['tasks'] = async ({ mode, tag }) => {
     is_checked: mode === 'completed' ? true : undefined,
     is_archived: mode === 'archived' ? true : undefined,
   }
-  const tagFilter =
-    tag !== undefined
-      ? await db.tag.findFirst({
-          where: { name: tag },
-          select: { id: true },
-        })
-      : undefined
 
-  return db.user.findUnique({ where: { id: context.currentUser.id } }).tasks({
-    where: {
-      ...modeFilter,
-      tags: tagFilter
-        ? {
-            some: {
-              id: tagFilter.id,
-            },
-          }
-        : {},
-    },
-    include: {
-      tags: true,
-    },
-  })
+  return db.user
+    .findUnique({
+      where: { id: context.currentUser.id },
+    })
+    .tasks({
+      where: {
+        ...modeFilter,
+        tags: { some: { name: tag !== 'undefined' ? tag : undefined } },
+      },
+    })
 }
 
 export const task: QueryResolvers['task'] = ({ id }) => {
@@ -47,9 +36,6 @@ export const task: QueryResolvers['task'] = ({ id }) => {
     throw organizeErrorMessage(['参照権限のないタスクです'])
   return db.task.findUnique({
     where: { id },
-    include: {
-      tags: true,
-    },
   })
 }
 
@@ -82,9 +68,6 @@ export const createTask: MutationResolvers['createTask'] = ({ input }) => {
         }),
       },
       user_id: context.currentUser.id,
-    },
-    include: {
-      tags: true,
     },
   })
 }
@@ -122,9 +105,6 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
       },
     },
     where: { id },
-    include: {
-      tags: true,
-    },
   })
 }
 
@@ -140,9 +120,6 @@ export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
   return await db.task.update({
     data: { is_checked: !previous.is_checked },
     where: { id },
-    include: {
-      tags: true,
-    },
   })
 }
 
@@ -157,9 +134,6 @@ export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
     return await db.task.update({
       data: { is_archived: !previous.is_archived },
       where: { id },
-      include: {
-        tags: true,
-      },
     })
   }
 
