@@ -1,8 +1,4 @@
-import type {
-  QueryResolvers,
-  MutationResolvers,
-  TaskResolvers,
-} from 'types/graphql'
+import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
 import { validateWith } from '@redwoodjs/api'
 import { context } from '@redwoodjs/graphql-server'
@@ -18,7 +14,7 @@ export const tasks: QueryResolvers['tasks'] = async ({ mode, tag }) => {
     is_checked: mode === 'completed' ? true : undefined,
     is_archived: mode === 'archived' ? true : undefined,
   }
-
+  console.log('debug3')
   return db.user
     .findUnique({
       where: { id: context.currentUser.id },
@@ -28,6 +24,7 @@ export const tasks: QueryResolvers['tasks'] = async ({ mode, tag }) => {
         ...modeFilter,
         tags: { some: { name: tag !== 'undefined' ? tag : undefined } },
       },
+      include: { tags: true },
     })
 }
 
@@ -36,6 +33,7 @@ export const task: QueryResolvers['task'] = ({ id }) => {
     throw organizeErrorMessage(['参照権限のないタスクです'])
   return db.task.findUnique({
     where: { id },
+    include: { tags: true },
   })
 }
 
@@ -69,6 +67,7 @@ export const createTask: MutationResolvers['createTask'] = ({ input }) => {
       },
       user_id: context.currentUser.id,
     },
+    include: { tags: true },
   })
 }
 
@@ -105,22 +104,29 @@ export const updateTask: MutationResolvers['updateTask'] = ({ id, input }) => {
       },
     },
     where: { id },
+    include: { tags: true },
   })
 }
 
 export const updateCheckTask: MutationResolvers['updateCheckTask'] = async ({
   id,
 }) => {
+  console.log('debug1s')
   const previous = await db.task.findFirst({
     where: { id, user_id: context.currentUser.id },
+    select: { is_checked: true },
   })
+  console.log('debug2')
   validateWith(() => {
     if (!previous) throw organizeErrorMessage(['更新権限のないタスクです'])
   })
-  return await db.task.update({
+  const updated = await db.task.update({
     data: { is_checked: !previous.is_checked },
     where: { id },
+    include: { tags: true },
   })
+  console.log('debug updateTask end')
+  return updated
 }
 
 export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
@@ -131,9 +137,10 @@ export const updateArchiveTask: MutationResolvers['updateArchiveTask'] =
     validateWith(() => {
       if (!previous) throw organizeErrorMessage(['更新権限のないタスクです'])
     })
-    return await db.task.update({
+    return db.task.update({
       data: { is_archived: !previous.is_archived },
       where: { id },
+      include: { tags: true },
     })
   }
 
@@ -145,9 +152,4 @@ export const deleteTask: MutationResolvers['deleteTask'] = ({ id }) => {
   return db.task.delete({
     where: { id },
   })
-}
-
-export const Task: TaskResolvers = {
-  tags: (_obj, { root }) =>
-    db.task.findUnique({ where: { id: root.id } }).tags(),
 }
