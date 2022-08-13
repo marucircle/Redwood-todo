@@ -11,8 +11,7 @@ import { useUpdateArchiveTask } from 'src/hooks/tasks/useUpdateArchiveTask'
 import { useUpdateCheckTask } from 'src/hooks/tasks/useUpdateCheckTask'
 const Tasks = () => {
   const { taskFilterState, taskFilterDispatch } = useContext(TaskFilterContext)
-  const { tasks, getTasksLoading, getTasksRefetch } =
-    useGetTaskAll(taskFilterState)
+  const { tasks, getTasksLoading } = useGetTaskAll(taskFilterState)
   const { tags, getTagsLoading } = useGetTagAll()
   const { update: updateCheckTask, updateCheckTaskLoading } =
     useUpdateCheckTask()
@@ -67,14 +66,14 @@ const Tasks = () => {
                 })
               }
               onChangeCheck={async () => {
-                const toastId = toast.loading('Loading...')
+                const toastId = toast.loading('タスクステータス更新中...')
                 await updateCheckTask({ variables: { id: task.id } })
                 toast.dismiss(toastId)
-                getTasksRefetch()
               }}
               onChangeArchive={async () => {
+                const toastId = toast.loading('タスクステータス更新中...')
                 await updateArchiveTask({ variables: { id: task.id } })
-                getTasksRefetch()
+                toast.dismiss(toastId)
               }}
             />
           )
