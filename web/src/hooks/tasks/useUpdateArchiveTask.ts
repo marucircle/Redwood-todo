@@ -12,7 +12,7 @@ export const useUpdateArchiveTask = () => {
     {
       onCompleted: () => {
         toast.success('タスクのステータス更新に成功しました！')
-        navigate(routes.task())
+        navigate(routes.tasks())
       },
       onError: () => {
         toast.error('タスクのステータス更新に失敗しました...。')

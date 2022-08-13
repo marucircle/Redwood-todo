@@ -1,8 +1,4 @@
-import type {
-  QueryResolvers,
-  MutationResolvers,
-  TagResolvers,
-} from 'types/graphql'
+import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
 import { validateWith } from '@redwoodjs/api'
 
@@ -14,22 +10,12 @@ import { stringValidation } from 'src/validations/stringValidation'
 import { hasTag } from './tags.validation'
 
 export const tags: QueryResolvers['tags'] = () => {
-  return db.tag.findMany({
-    where: {
-      user_id: context.currentUser.id,
-    },
-    include: {
-      tasks: true,
-    },
-  })
+  return db.user.findUnique({ where: { id: context.currentUser.id } }).tags()
 }
 
 export const tag: QueryResolvers['tag'] = ({ id }) => {
   return db.tag.findUnique({
     where: { id },
-    include: {
-      tasks: true,
-    },
   })
 }
 
@@ -101,9 +87,4 @@ export const deleteTag: MutationResolvers['deleteTag'] = ({ id }) => {
   return db.tag.delete({
     where: { id },
   })
-}
-
-export const Tag: TagResolvers = {
-  user: (_obj, { root }) =>
-    db.tag.findUnique({ where: { id: root.id } }).user(),
 }

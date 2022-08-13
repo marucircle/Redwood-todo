@@ -70,7 +70,7 @@ const CreateTask = () => {
       )}
       <div className="my-4">
         <span className="bg-info px-4 mx-4 py-2">
-          <Link to={routes.task()}>Back</Link>
+          <Link to={routes.tasks()}>Back</Link>
         </span>
       </div>
       <Form

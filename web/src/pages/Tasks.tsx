@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import toast from 'react-hot-toast'
+
 import { Loading as LoadingView } from 'src/components/Loading'
 import { TaskCard } from 'src/components/TaskCard'
 import { TaskFilterContext } from 'src/contexts/TaskFilterContext'
@@ -9,13 +11,20 @@ import { useUpdateArchiveTask } from 'src/hooks/tasks/useUpdateArchiveTask'
 import { useUpdateCheckTask } from 'src/hooks/tasks/useUpdateCheckTask'
 const Tasks = () => {
   const { taskFilterState, taskFilterDispatch } = useContext(TaskFilterContext)
-  const { tasks, getTasksLoading, getTasksRefetch } =
-    useGetTaskAll(taskFilterState)
+  const { tasks, getTasksLoading } = useGetTaskAll(taskFilterState)
   const { tags, getTagsLoading } = useGetTagAll()
-  const { update: updateCheckTask } = useUpdateCheckTask()
-  const { update: updateArchiveTask } = useUpdateArchiveTask()
+  const { update: updateCheckTask, updateCheckTaskLoading } =
+    useUpdateCheckTask()
+  const { update: updateArchiveTask, updateArchiveTaskLoading } =
+    useUpdateArchiveTask()
 
-  if (getTasksLoading || getTagsLoading) return <LoadingView></LoadingView>
+  if (
+    getTasksLoading ||
+    getTagsLoading ||
+    updateCheckTaskLoading ||
+    updateArchiveTaskLoading
+  )
+    return <LoadingView></LoadingView>
 
   return (
     <div className="px-8">
@@ -57,12 +66,14 @@ const Tasks = () => {
                 })
               }
               onChangeCheck={async () => {
+                const toastId = toast.loading('タスクステータス更新中...')
                 await updateCheckTask({ variables: { id: task.id } })
-                getTasksRefetch()
+                toast.dismiss(toastId)
               }}
               onChangeArchive={async () => {
+                const toastId = toast.loading('タスクステータス更新中...')
                 await updateArchiveTask({ variables: { id: task.id } })
-                getTasksRefetch()
+                toast.dismiss(toastId)
               }}
             />
           )

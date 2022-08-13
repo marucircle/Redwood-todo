@@ -19,5 +19,10 @@ export const useGetTaskAll = (taskFilterState: TaskFilterStateType) => {
     },
   })
 
-  return { tasks: data?.tasks, getTasksError, getTasksLoading, getTasksRefetch }
+  return {
+    tasks: data?.tasks ?? [],
+    getTasksError,
+    getTasksLoading,
+    getTasksRefetch,
+  }
 }

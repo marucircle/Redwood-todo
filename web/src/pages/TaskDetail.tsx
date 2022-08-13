@@ -13,7 +13,7 @@ const TaskDetail = () => {
 
   if (getTaskLoading) return <LoadingView></LoadingView>
   if (getTaskError) {
-    return <Redirect to={routes.task()} />
+    return <Redirect to={routes.tasks()} />
   }
 
   const mdFile = new Blob([task.detail])
@@ -22,7 +22,7 @@ const TaskDetail = () => {
     <div>
       <div className="my-4">
         <span className="bg-info px-4 py-2">
-          <Link to={routes.task()}>Back</Link>
+          <Link to={routes.tasks()}>Back</Link>
         </span>
       </div>
       <div className="mx-4">
