@@ -3448,6 +3448,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdx-js/react@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@mdx-js/react@npm:2.2.1"
+  dependencies:
+    "@types/mdx": ^2.0.0
+    "@types/react": ">=16"
+  peerDependencies:
+    react: ">=16"
+  checksum: 897e0a0bb87699db280ef0c2096fd00ea6918dd34084916475104fdc8fbe7f06cc54e7202b2e01c73a8680072454f7c91682cf2f125e088b1f0ac20be7ad3928
+  languageName: node
+  linkType: hard
+
 "@mdx-js/util@npm:1.6.22":
   version: 1.6.22
   resolution: "@mdx-js/util@npm:1.6.22"
@@ -6530,6 +6542,13 @@ __metadata:
   version: 1.0.2
   resolution: "@types/mdurl@npm:1.0.2"
   checksum: 38d18f0d63af68d0480b821b3d884e144b669c0617010da4c13a444498384b4833aff17f84768afeeca7ef3e6cfcd8bb7c462ffbc39a81ff549f17ae5c3ffb8e
+  languageName: node
+  linkType: hard
+
+"@types/mdx@npm:^2.0.0":
+  version: 2.0.3
+  resolution: "@types/mdx@npm:2.0.3"
+  checksum: 8637338ca56191fa6dbf3aaa06b6468d0ad9bcd824294e41bafd53fb9ca48657ae8487a8c8146c8285c46708e1a281632efff9bec667177cacf23bf60981f5a8
   languageName: node
   linkType: hard
 
@@ -25479,7 +25498,7 @@ autoprefixer@latest:
     "@babel/core": ^7.18.6
     "@material-ui/core": ^4.12.4
     "@material-ui/icons": ^4.11.3
-    "@mdx-js/react": ^1.6.22
+    "@mdx-js/react": ^2.2.1
     "@redwoodjs/auth": 2.2.0
     "@redwoodjs/forms": 2.2.0
     "@redwoodjs/router": 2.2.0
